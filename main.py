@@ -22,7 +22,7 @@ pygame.display.set_caption("joguinho")
 #
 # making the loop while to start
 while True:
-    clock.tick(200) 
+    clock.tick(100) 
     screen.fill((0,0,0))
     game.run()
 
