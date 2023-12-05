@@ -1,9 +1,12 @@
-from typing import Any
 import pygame
-from game_data import niveis
+from game_data import minijogos_lista
 
 class Node(pygame.sprite.Sprite):
+    "Classe necessária para a definição dos retângulos de cada bloco do jogo"
     def __init__(self, pos, status, icon_speed):
+        """Classe que inicializa os Nodos
+        TODO: colocar param, colocar imagens
+        """
         super().__init__()
         self.image = pygame.Surface((100, 80))
         if status == "available":
@@ -16,7 +19,15 @@ class Node(pygame.sprite.Sprite):
         self.detection_zone = pygame.Rect(self.rect.centerx - (icon_speed/2), self.rect.centery - (icon_speed/2),icon_speed,icon_speed)
 
 class Icon(pygame.sprite.Sprite):
+    """
+    Classe reponsável por criar o personagem que se movimenta pelos minimaps
+    TODO: Colocar param, colocar imagem
+    """
+
     def __init__(self,pos):
+        """Classe que inicializa o Icon que fica entre os minijogos
+        TODO: colocar param, colocar imagens
+        """
         super().__init__()
         self.pos = pos
         self.image = pygame.Surface((20,20))
@@ -25,13 +36,13 @@ class Icon(pygame.sprite.Sprite):
     def update(self):
         self.rect.center = self.pos
 
-class Overworld:
-    def __init__(self, start_level, max_level, surface, create_level):
+class Level_map():
+    def __init__(self, start_level, max_level, surface, create_level_map):
         # setup
         self.display_surface = surface
         self.max_level = max_level
         self.current_level = start_level
-        self.create_level = create_level
+        self.create_level_map = create_level_map
 
         # movement logic
         self.move_direction = pygame.math.Vector2(0,0)
@@ -45,7 +56,7 @@ class Overworld:
     def create_nodes(self):
         self.nodes = pygame.sprite.Group() 
 
-        for index, node_data in enumerate(niveis.values()):
+        for index, node_data in enumerate(minijogos_lista.values()):
             if index <= self.max_level:
                 node_sprite = Node(node_data["posicao"], "available", self.speed)
                 self.nodes.add(node_sprite)
@@ -55,11 +66,12 @@ class Overworld:
     
     def draw_paths(self):
         centers = []
-        for index, node_data in enumerate(niveis.values()):
+        for index, node_data in enumerate(minijogos_lista.values()):
             if index <= self.max_level:
                 centers.append(node_data["posicao"])
-            
-        pygame.draw.lines(self.display_surface, "red", False, centers, 6)
+
+        if 1 <= len(centers):
+            pygame.draw.lines(self.display_surface, "red", False, centers, 6)
     
     def setup_icon(self):
         self.icon = pygame.sprite.GroupSingle()
@@ -78,7 +90,8 @@ class Overworld:
                 self.current_level -= 1
                 self.moving = True
             elif keys[pygame.K_SPACE]:
-                self.create_level(self.current_level)
+                print(self.current_level)
+                self.create_level_map(self.current_level)
 
     def get_movement_data(self, target):
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
@@ -104,4 +117,3 @@ class Overworld:
         self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
-        

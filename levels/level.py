@@ -25,8 +25,6 @@ class Level:
 
         if keys[pygame.K_ESCAPE]:
             self.create_overworld(self.current_level, 0)
-            
-
 
     def run(self):
         self.input()
