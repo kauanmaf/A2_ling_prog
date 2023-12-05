@@ -20,7 +20,7 @@ class Minigame_abs(ABC):
         ...
 
 
-class Player(ABC):
+class Player(ABC, pygame.sprite.Sprite):
     "Classe abstrata que serve para todos os players do jogo"
 
     def handle_input(self, event):
