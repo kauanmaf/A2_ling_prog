@@ -1,5 +1,5 @@
 import pygame
-from game_data import minijogos_lista
+from settings import minijogos_lista
 
 class Node(pygame.sprite.Sprite):
     "Classe necessária para a definição dos retângulos de cada bloco do jogo"
@@ -90,7 +90,6 @@ class Level_map():
                 self.current_level -= 1
                 self.moving = True
             elif keys[pygame.K_SPACE]:
-                print(self.current_level)
                 self.create_level_map(self.current_level)
 
     def get_movement_data(self, target):

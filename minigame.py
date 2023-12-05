@@ -1,6 +1,5 @@
 import pygame
 from settings import *
-from game_data import minijogos_lista
 from abstract import Minigame_abs
 import sys
 
@@ -65,34 +64,3 @@ class Minigame():
         elif self.current_level == 3:
             # Run FLAPPY_BIRD minigame
             print("Running FLAPPY_BIRD minigame")
-        # else:
-        #     print("fudeu")
-
-# Assuming you have the necessary imports and definitions
-# ...
-
-# Creating an instance of Minigame
-current_level = 0  # Replace this with the actual level you want
-surface = pygame.display.set_mode((screen_width, screen_height))  # Replace with your actual surface
-create_level_map = lambda current_level, new_max_level: None  # Replace with your actual create_level_map function
-max_level = 3
-
-minigame_instance = Minigame(current_level, surface, create_level_map)
-# Game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Running the Minigame instance
-    minigame_instance.run_minigame()
-
-    # Update the display
-    pygame.display.flip()
-
-# Quit Pygame
-pygame.quit()
-
-
-
