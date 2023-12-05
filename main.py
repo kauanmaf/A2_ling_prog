@@ -12,7 +12,7 @@ game = Game()
 # Adicionando nome 
 pygame.display.set_caption("Mini Arcade")
 
-#
+
 # making the loop while to start
 while True:
     # Configurando a taxa de atualização do jogo 

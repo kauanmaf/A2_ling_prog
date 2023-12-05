@@ -5,6 +5,9 @@ import random
 from settings import *
 from abstract import *
 
+# screen = pygame.display.set_mode((screen_width, screen_height))
+
+
 class Bird(pygame.sprite.Sprite):
     def __init__(self, bird_start_position):
         pygame.sprite.Sprite.__init__(self)
@@ -93,10 +96,11 @@ class Pipe(pygame.sprite.Sprite):
         return self.score
 
 class CollisionDetector:
-    def __init__(self, bird, ground, pipes):
+    def __init__(self, bird, ground, pipes, screen):
         self.bird = bird
         self.ground = ground
         self.pipes = pipes
+        self.screen = screen
 
     def check_collisions(self):
         collision_ground = pygame.sprite.spritecollide(self.bird.sprite, self.ground, False)
@@ -106,7 +110,7 @@ class CollisionDetector:
             self.bird.sprite.alive = False
             if collision_ground:
                 # Draw the game over image
-                screen.blit(game_over_image,
+                self.screen.blit(game_over_image,
                             (screen_width // 2 - game_over_image.get_width() // 2,
                              screen_height // 2 - game_over_image.get_height() // 2))
 
@@ -122,7 +126,7 @@ class FlappyBird:
         self.ground = self.create_ground()
         self.create_bird()
 
-        self.collision_detector = CollisionDetector(self.bird, self.ground, self.pipes)
+        self.collision_detector = CollisionDetector(self.bird, self.ground, self.pipes, self.screen)
 
         self.score = 0
         self.pipe_timer = 100
@@ -195,31 +199,31 @@ class FlappyBird:
         self.update()
 
 
-# Configurando o jogo
-pygame.init()
-screen = pygame.display.set_mode((screen_width, screen_height))
-clock = pygame.time.Clock()
-game = FlappyBird(screen)
+# # Configurando o jogo
+# pygame.init()
+# screen = pygame.display.set_mode((screen_width, screen_height))
+# clock = pygame.time.Clock()
+# game = FlappyBird(screen)
 
-# Adicionando nome
-pygame.display.set_caption("Mini Arcade")
+# # Adicionando nome
+# pygame.display.set_caption("Mini Arcade")
 
-# making the loop while to start
-while True:
-    # Configurando a taxa de atualização do jogo
-    clock.tick(100)
+# # making the loop while to start
+# while True:
+#     # Configurando a taxa de atualização do jogo
+#     clock.tick(100)
 
-    # Configurando o fundo da tela
-    screen.fill((0, 0, 0))
+#     # Configurando o fundo da tela
+#     screen.fill((0, 0, 0))
 
-    # Criando uma instância do jogo
-    game.run()
+#     # Criando uma instância do jogo
+#     game.run()
 
-    # Loop for para casa a pessoa queira sair do jogo
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+#     # Loop for para casa a pessoa queira sair do jogo
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             sys.exit()
 
-    # Fazendo um update pra manter no caso de atualizações
-    pygame.display.update()
+#     # Fazendo um update pra manter no caso de atualizações
+#     pygame.display.update()
