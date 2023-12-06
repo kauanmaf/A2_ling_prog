@@ -150,7 +150,7 @@ class FlappyBird:
         self.menu = Menu(self.screen, self.bird_position)
         self.game_started = False
 
-        self.start_delay_duration = 5  # Set the delay duration (in frames)
+        self.start_delay_duration = 15  # Set the delay duration (in frames)
         self.current_delay = self.start_delay_duration
 
 
@@ -215,7 +215,6 @@ class FlappyBird:
         
         self.collision_detector.check_collisions()
 
-
     def run(self):
         keys = pygame.key.get_pressed()
 
@@ -230,6 +229,7 @@ class FlappyBird:
             if self.current_delay <= 0:
                 self.game_started = True
                 self.current_delay = self.start_delay_duration
+
         else:
             self.draw()
             self.update()
