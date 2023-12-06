@@ -75,25 +75,11 @@ class Pipe(pygame.sprite.Sprite):
         self.passed = False
 
         self.pipe_type = pipe_type
-        self.score = 0
-
     
     def update(self):
         self.rect.x -= self.scroll_speed
         if self.rect.x <= -screen_width:
-            self.kill()
-        
-        if self.pipe_type == "bottom":
-            if self.bird_position[0]> self.rect.topleft[0] and not self.passed:
-                self.enter = True
-            if self.bird_position[0]> self.rect.topright[0] and not self.passed:
-                self.exit = True
-            if self.enter and self.exit and not self.passed:
-                self.passed = True
-                self.score += 1
-    
-    def get_score(self):
-        return self.score
+            self.kill()  
 
 class CollisionDetector:
     def __init__(self, bird, ground, pipes, screen):
@@ -129,9 +115,8 @@ class Menu:
         self.screen.blit(start_image, (screen_width // 2 - start_image.get_width() // 2,
                                         screen_height // 2 - start_image.get_height() // 2))
 
-
 class FlappyBird:
-    def __init__(self, screen):
+    def __init__(self, screen, score = 0):
         self.screen = screen
         self.scroll_speed = 3
         self.bird_position = (200, screen_height / 2 -100)
@@ -145,7 +130,6 @@ class FlappyBird:
 
         self.score = 0
         self.pipe_timer = 100
-
         self.screen = screen
         self.menu = Menu(self.screen, self.bird_position)
         self.game_started = False
@@ -153,7 +137,19 @@ class FlappyBird:
         self.start_delay_duration = 15  # Set the delay duration (in frames)
         self.current_delay = self.start_delay_duration
 
+    def update_score(self):
+        for pipe in self.pipes.sprites():
+            if not pipe.passed and pipe.pipe_type == "bottom":
+                bird_rect = self.bird.sprite.rect
+                pipe_rect = pipe.rect
+                exit_position = pipe_rect.x + pipe_rect.width
 
+                if bird_rect.x > exit_position:
+                    pipe.passed = True
+                    self.score += 1
+                
+        
+        
     def create_bird(self):
         self.bird.add(Bird(self.bird_position))
 
@@ -206,15 +202,17 @@ class FlappyBird:
         user_input = pygame.key.get_pressed()
 
         if len(self.ground) <= 2:
-            self.ground = self.create_ground()  
+            self.ground = self.create_ground()
 
         if self.bird.sprite.alive:
-            self.pipes.update()
-            self.ground.update() 
-        self.bird.update(user_input)
-        
-        self.collision_detector.check_collisions()
+            self.update_score()
 
+            self.pipes.update()
+            self.ground.update()
+        self.bird.update(user_input)
+
+        # Check for collisions after updating the bird position
+        self.collision_detector.check_collisions()
     def reset_game(self):
         # Reset game state for a new game
         self.bird_position = (200, screen_height / 2 - 100)
@@ -229,7 +227,6 @@ class FlappyBird:
         self.bird.sprite.alive = True  # Ensure the bird is alive for the new game
 
         self.collision_detector = CollisionDetector(self.bird, self.ground, self.pipes, self.screen)
-
 
     def run(self): 
         keys = pygame.key.get_pressed()
