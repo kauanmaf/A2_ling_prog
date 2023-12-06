@@ -215,7 +215,23 @@ class FlappyBird:
         
         self.collision_detector.check_collisions()
 
-    def run(self):
+    def reset_game(self):
+        # Reset game state for a new game
+        self.bird_position = (200, screen_height / 2 - 100)
+        self.create_bird()
+        self.pipes.empty()
+        self.ground.empty()
+        self.ground = self.create_ground()
+        self.score = 0
+        self.pipe_timer = 100
+        self.game_over = False
+        self.current_restart_delay = self.start_delay_duration
+        self.bird.sprite.alive = True  # Ensure the bird is alive for the new game
+
+        self.collision_detector = CollisionDetector(self.bird, self.ground, self.pipes, self.screen)
+
+
+    def run(self): 
         keys = pygame.key.get_pressed()
 
         if not self.game_started:
@@ -229,37 +245,43 @@ class FlappyBird:
             if self.current_delay <= 0:
                 self.game_started = True
                 self.current_delay = self.start_delay_duration
+        
+        elif not self.bird.sprite.alive and keys[pygame.K_r] :
+            self.reset_game()
 
         else:
             self.draw()
             self.update()
 
+# Configurando o jogo
+pygame.init()
+screen = pygame.display.set_mode((screen_width, screen_height))
+clock = pygame.time.Clock()
+game = FlappyBird(screen)
 
-# # Configurando o jogo
-# pygame.init()
-# screen = pygame.display.set_mode((screen_width, screen_height))
-# clock = pygame.time.Clock()
-# game = FlappyBird(screen)
+# Adicionando nome
+pygame.display.set_caption("Mini Arcade")
 
-# # Adicionando nome
-# pygame.display.set_caption("Mini Arcade")
+# making the loop while to start
+while True:
+    # Configurando a taxa de atualização do jogo
+    clock.tick(100)
 
-# # making the loop while to start
-# while True:
-#     # Configurando a taxa de atualização do jogo
-#     clock.tick(100)
+    # Configurando o fundo da tela
+    screen.fill((0, 0, 0))
 
-#     # Configurando o fundo da tela
-#     screen.fill((0, 0, 0))
+    # Criando uma instância do jogo
+    game.run()
 
-#     # Criando uma instância do jogo
-#     game.run()
+    # Loop for para casa a pessoa queira sair do jogo
+    for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
 
-#     # Loop for para casa a pessoa queira sair do jogo
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             pygame.quit()
-#             sys.exit()
-
-#     # Fazendo um update pra manter no caso de atualizações
-#     pygame.display.update()
+    # Fazendo um update pra manter no caso de atualizações
+    pygame.display.update()
