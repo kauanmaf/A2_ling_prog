@@ -114,12 +114,27 @@ class CollisionDetector:
                             (screen_width // 2 - game_over_image.get_width() // 2,
                              screen_height // 2 - game_over_image.get_height() // 2))
 
+class Menu:
+    def __init__(self, screen, bird_start_position):
+        self.screen = screen
+        self.clock = pygame.time.Clock()
+        self.bird_start_position = bird_start_position
+
+    def draw(self):
+        self.screen.blit(skyline_image, (0, 0))
+        self.screen.blit(ground_image, Ground(0, 520, 3))
+        self.screen.blit(ground_image, Ground(ground_image.get_width(), 520, 3))
+
+        self.screen.blit(bird_images[0], self.bird_start_position)
+        self.screen.blit(start_image, (screen_width // 2 - start_image.get_width() // 2,
+                                        screen_height // 2 - start_image.get_height() // 2))
+
 
 class FlappyBird:
     def __init__(self, screen):
         self.screen = screen
         self.scroll_speed = 3
-        self.bird_position = (200, screen_height / 2)
+        self.bird_position = (200, screen_height / 2 -100)
 
         self.bird = pygame.sprite.GroupSingle()
         self.pipes = pygame.sprite.Group()
@@ -130,6 +145,13 @@ class FlappyBird:
 
         self.score = 0
         self.pipe_timer = 100
+
+        self.screen = screen
+        self.menu = Menu(self.screen, self.bird_position)
+        self.game_started = False
+
+        self.start_delay_duration = 5  # Set the delay duration (in frames)
+        self.current_delay = self.start_delay_duration
 
 
     def create_bird(self):
@@ -195,8 +217,22 @@ class FlappyBird:
 
 
     def run(self):
-        self.draw()
-        self.update()
+        keys = pygame.key.get_pressed()
+
+        if not self.game_started:
+            self.menu.draw()
+
+            if keys[pygame.K_SPACE]:
+                self.current_delay -= 1
+            else:
+                self.current_delay = self.start_delay_duration
+
+            if self.current_delay <= 0:
+                self.game_started = True
+                self.current_delay = self.start_delay_duration
+        else:
+            self.draw()
+            self.update()
 
 
 # # Configurando o jogo

@@ -35,6 +35,13 @@ class Minigame():
             print("Creating FLAPPY_BIRD game")
             self.current_game = None  # Replace with the actual instance
 
+    # def input(self):
+    #     keys = pygame.key.get_pressed()
+    #     if keys[pygame.K_ESCAPE]:
+    #         self.create_level_map(self.current_level, self.new_max_level)
+    
+
     def run_minigame(self):
         self.current_game.run()
+        # self.input()
         
