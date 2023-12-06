@@ -23,12 +23,8 @@ class Minigame_abs(ABC):
 class Player(ABC, pygame.sprite.Sprite):
     "Classe abstrata que serve para todos os players do jogo"
 
-    def handle_input(self, event):
-        "Manipula eventos de entrada para o jogador"
-        ...
-    
-    def collide(self, other_object):
-        "Verifica se o jogador colide com outro objeto no jogo"
+    def __init__(self):
+        "Serve para iniciar o jogo"
         ...
 
     def update(self): 
