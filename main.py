@@ -1,23 +1,22 @@
 import pygame
+from settings import *
+from basic_jumper_classes import Jumper
 
 # Inicializando o pygame
 pygame.init()
-
-# Definindo as dimensões da janela do jogo
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 600
-
-# Carregando imagens
-
-bg_image = pygame.image.load("endless_vertical_platformer_assets/background.png").convert_alpha()
 
 # Criando a janela do jogo
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Endless Vertical")
 
+jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
+
 while True:
     # Desenhando o plano de fundo
-    screen.blit(background.png, (0, 0))
+    screen.blit(bg_image, (0, 0))
+    
+    # Desenhando eventos do player
+    jumpy.draw()
 
     # Elaborando manipulador de eventos
     for event in pygame.event.get():
