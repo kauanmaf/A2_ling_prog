@@ -7,6 +7,10 @@ from abc import ABC
 class Minigame(ABC):
     "Classe abstrata que serve para todos os minigames"
 
+    def __init__(self):
+        "Serve para iniciar a classe do minijogo"
+        ...
+
     def update(self):
         "Atualiza o estado do minijogo a cada quadro"
         ...
@@ -23,12 +27,8 @@ class Minigame(ABC):
 class Player(ABC):
     "Classe abstrata que serve para todos os players do jogo"
 
-    def handle_input(self, event):
-        "Manipula eventos de entrada para o jogador"
-        ...
-    
-    def collide(self, other_object):
-        "Verifica se o jogador colide com outro objeto no jogo"
+    def __init__(self):
+        "Serve para iniciar a classe do player do jogo"
         ...
 
     def update(self): 
