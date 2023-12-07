@@ -5,11 +5,7 @@ from settings import *
 
 pygame.init()
 
-current_image = background1
-
-width = 1280
-height = 720
-screen_size = (width, height)
+screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption('A Frog Journey')
 
@@ -47,7 +43,7 @@ player_group = pygame.sprite.Group()
 obstacle_group = pygame.sprite.Group()
 
 # create the player's frog
-player = PlayerObject(player_x, player_y, speed=6)
+player = PlayerObject(fg_player_x, fg_player_y, speed=6)
 player_group.add(player)
 
 # load the obstacle images
@@ -69,26 +65,26 @@ while running:
         # move the frog using the left/right arrow key
         if event.type == KEYDOWN:
             if event.key == K_LEFT and player.rect.center[0] > left_lane:
-                target_lane = left_lane
+                fg_target_lane = left_lane
             elif event.key == K_RIGHT and player.rect.center[0] < right_lane:
-                target_lane = right_lane
+                fg_target_lane = right_lane
     
     # Smoothly move the frog towards the target lane
-    if player.rect.center[0] < target_lane:
+    if player.rect.center[0] < fg_target_lane:
         player.rect.x += player.speed
-        if player.rect.center[0] > target_lane:
-            player.rect.center = (target_lane, player.rect.centery)
-    elif player.rect.center[0] > target_lane:
+        if player.rect.center[0] > fg_target_lane:
+            player.rect.center = (fg_target_lane, player.rect.centery)
+    elif player.rect.center[0] > fg_target_lane:
         player.rect.x -= player.speed
-        if player.rect.center[0] < target_lane:
-            player.rect.center = (target_lane, player.rect.centery)
+        if player.rect.center[0] < fg_target_lane:
+            player.rect.center = (fg_target_lane, player.rect.centery)
     
                     
     # Draw the current image on the screen
     if pygame.time.get_ticks() % 2000 < 1000:
-        background_image = background1
+        background_image = fg_background1
     else:
-        background_image = background2
+        background_image = fg_background2
 
     screen.blit(background_image, (0, 0))
 
@@ -112,23 +108,23 @@ while running:
             
             # select a random obstacle image
             image = random.choice(obstacle_images)
-            vehicle = Objects(image, lane, height / -2)
+            vehicle = Objects(image, lane, screen_height / -2)
             obstacle_group.add(vehicle)
     
     # make the obstacles move
     for obstacle in obstacle_group:
-        obstacle.rect.y += speed
+        obstacle.rect.y += fg_speed
         
         # remove obstacle once it goes off screen
-        if obstacle.rect.top >= height:
+        if obstacle.rect.top >= screen_height:
             obstacle.kill()
             
             # add to score
-            score += 1
+            fg_score += 1
             
             # speed up the game after passing 5 vehicles
-            if score > 0 and score % 5 == 0:
-                speed += 1
+            if fg_score > 0 and fg_score % 5 == 0:
+                fg_speed += 1
     
     
     # draw the obstacles
@@ -136,7 +132,7 @@ while running:
     
     # display the score
     font = pygame.font.Font(pygame.font.get_default_font(), 30)
-    text = font.render('Score: ' + str(score), True, white)
+    text = font.render('Score: ' + str(fg_score), True, white)
     text_rect = text.get_rect()
     text_rect.center = (640, 40)
     screen.blit(text, text_rect)
@@ -144,44 +140,44 @@ while running:
     # check if there's a head on collision
     if pygame.sprite.spritecollide(player, obstacle_group, True):
         
-        collision_sound.play()
-        gameover = True
+        fg_collision_sound.play()
+        fg_gameover = True
 
         player.set_dead() 
         
             
     # display game over
-    if gameover:
+    if fg_gameover:
         
         screen.blit(death_box, (0, 0))
 
     pygame.display.update()
 
     # wait for user's input to play again or exit
-    while gameover:
+    while fg_gameover:
         
         clock.tick(fps)
         
         for event in pygame.event.get():
             
             if event.type == QUIT:
-                gameover = False
+                fg_gameover = False
                 running = False
                 
             # get the user's input (y or n)
             if event.type == KEYDOWN:
                 if event.key == K_y:
                     # reset the game
-                    gameover = False
-                    speed = 2
-                    score = 0
+                    fg_gameover = False
+                    fg_speed = 2
+                    fg_score = 0
                     obstacle_group.empty()
-                    player.rect.center = [player_x, player_y]
+                    player.rect.center = [fg_player_x, fg_player_y]
                     player.visible = True
 
                 elif event.key == K_n:
                     # exit the loops
-                    gameover = False
+                    fg_gameover = False
                     running = False
 
     pygame.display.update()
