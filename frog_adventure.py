@@ -1,29 +1,9 @@
 import pygame
 from pygame.locals import *
 import random
-
+from settings import *
 
 pygame.init()
-
-background1 = pygame.image.load("./assets/background1.png")
-background2 = pygame.image.load("./assets/background2.png")
-lilypad1 = pygame.image.load("./assets/lilypad1.png")
-lilypad2 = pygame.image.load("./assets/lilypad2.png")
-lilypad3 = pygame.image.load("./assets/lilypad3.png")
-alligator = pygame.image.load("./assets/crocodile.png")
-frog_img = pygame.image.load("./assets/froginho.png")
-death_box = pygame.image.load("./assets/deathbox1.png")
-dead_frog = pygame.image.load("./assets/dead_frog'.png")
-
-
-dead_frog_rect = dead_frog.get_rect()
-
-pygame.mixer.music.load("./assets/a_frog_adventure.mp3")
-pygame.mixer.music.set_volume(0.5)
-pygame.mixer.music.play(-1)
-
-collision_sound = pygame.mixer.Sound("./assets/wet_frog.mp3")
-collision_sound.set_volume(0.5)
 
 current_image = background1
 
@@ -32,31 +12,6 @@ height = 720
 screen_size = (width, height)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption('A Frog Journey')
-
-
-# colors
-white = (255, 255, 255)
-
-# lane coordinates
-left_lane = 480
-center_lane = 640
-right_lane = 800
-lanes = [left_lane, center_lane, right_lane]
-
-# player's starting coordinates
-player_x = center_lane
-player_y = 640
-
-target_lane = center_lane
-
-# frame settings
-clock = pygame.time.Clock()
-fps = 100
-
-# game settings
-gameover = False
-speed = 2
-score = 0
 
 class Objects(pygame.sprite.Sprite):
     
