@@ -5,13 +5,15 @@ from basic_jumper_classes import Jumper
 # Inicializando o pygame
 pygame.init()
 
-# Criando a janela do jogo
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Endless Vertical")
-
 jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
 
-while True:
+run = True
+while run:
+    
+    clock.tick(FPS)
+    
+    jumpy.move()
+    
     # Desenhando o plano de fundo
     screen.blit(bg_image, (0, 0))
     
@@ -21,7 +23,8 @@ while True:
     # Elaborando manipulador de eventos
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
+            run = False
 
     # Atualizando a tela da janela
-    pygame.display.update()        
+    pygame.display.update()   
+pygame.quit()         
