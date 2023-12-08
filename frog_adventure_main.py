@@ -3,6 +3,7 @@ import pygame
 from classes_base_frog import *
 from pygame.locals import *
 from abstract import Minigame_abs
+import sys
 
 class FrogJourneyGame(Minigame_abs):
     
@@ -43,7 +44,8 @@ class FrogJourneyGame(Minigame_abs):
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.mixer.music.stop()
-                self.__fg_gameover = True
+                pygame.quit()
+                sys.exit()
 
             if event.type == KEYDOWN:
                 if event.key == K_LEFT and self.__player.rect.center[0] > left_lane:
@@ -148,7 +150,7 @@ class FrogJourneyGame(Minigame_abs):
         self.__player._visible = True
         self.__player.set_alive()
 
-pygame.display.set_caption('A Frog Journey')
+    pygame.display.set_caption('A Frog Journey')
 
 if __name__ == "__main__":
     game = FrogJourneyGame()
