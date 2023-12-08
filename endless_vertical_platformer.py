@@ -1,4 +1,5 @@
 import pygame
+import random
 from settings import *
 from abstract import *   
 
@@ -35,6 +36,17 @@ class Jumper(Player):
             dx = - self.rect.left
         if self.rect.right + dx > SCREEN_WIDTH:
             dx = SCREEN_WIDTH - self.rect.right
+            
+        # Averigando a colisão com as plataformas
+        for platform in platform_group:
+            # Colisão na direção y
+            if platform.rect.colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
+                # Verificando se está acima da plataforma
+                if self.rect.bottom < platform.rect.centery:
+                    if self.vel_y > 0:
+                        self.rect.bottom = platform.rect.top
+                        dy = 0
+                        self.vel_y = - 20
 
         # Verificando a colisão com o solo
         if self.rect.bottom + dy > SCREEN_HEIGHT:
@@ -48,3 +60,22 @@ class Jumper(Player):
     def draw(self):
         screen.blit(pygame.transform.flip(self.image, self.flip, False), (self.rect.x - 13, self.rect.y - 5))
         pygame.draw.rect(screen, WHITE, self.rect, 2)
+        
+class Platform(pygame.sprite.Sprite):
+    def __init__(self, x, y, width):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.transform.scale(platform_image, (width, 10))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        
+# Elaborando grupos de sprites
+platform_group = pygame.sprite.Group()
+
+# Criando plataformas temporárias
+for random_platform in range(MAX_PLATFORMS):
+    random_platform_width = random.randint(40, 60)
+    random_platform_x = random.randint(0, SCREEN_WIDTH - random_platform_width)
+    random_platform_y = random_platform * random.randint(80, 120)
+    platform = Platform(random_platform_x, random_platform_y, random_platform_width)
+    platform_group.add(platform)

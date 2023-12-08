@@ -1,10 +1,12 @@
 import pygame
+import random
 from settings import *
-from basic_jumper_classes import Jumper
+from endless_vertical_platformer import *
 
 # Inicializando o pygame
 pygame.init()
 
+# Criando a instância do jogador
 jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
 
 run = True
@@ -15,9 +17,10 @@ while run:
     jumpy.move()
     
     # Desenhando o plano de fundo
-    screen.blit(bg_image, (0, 0))
+    screen.blit(background_image, (0, 0))
     
-    # Desenhando eventos do player
+    # Desenhando sprites do player
+    platform_group.draw(screen)
     jumpy.draw()
 
     # Elaborando manipulador de eventos

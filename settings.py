@@ -17,10 +17,13 @@ FPS = 60
 
 # Construindo as variáveis do jogo
 GRAVITY = 1
+MAX_PLATFORMS = 10
 
 # Definindo as cores
 WHITE = (255, 255, 255)
 
 # Carregando imagens
 jumper_image = pygame.image.load("endless_vertical_platformer_assets/jumper.png")
-bg_image = pygame.image.load("endless_vertical_platformer_assets/background.png")
+background_image = pygame.image.load("endless_vertical_platformer_assets/background.png")
+platform_image = pygame.image.load("endless_vertical_platformer_assets/platform.png")
+
