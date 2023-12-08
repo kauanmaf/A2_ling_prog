@@ -72,8 +72,7 @@ class FlappyBird(Minigame_abs):
     - ``run(self)``:
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
     """
-
-
+    
     def __init__(self, screen):
         """
         Inicializa as variáveis necessárias para a criação do jogo

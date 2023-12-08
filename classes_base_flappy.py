@@ -54,12 +54,9 @@ class Bird(Player):
             Posição inicial do pássaro.
         """
         super().__init__()
-        # Inicialização dos atributos públicos
         self.image = bird_images[0]
         self.rect = self.image.get_rect()
         self.rect.center = bird_start_position
-
-        # Atributos privados e protegidos
         self.__image_index = 0
         self.__vel = 0
         self.__flap = False
@@ -77,14 +74,11 @@ class Bird(Player):
     - ``y_pos_ground`` (int):
         Posição vertical do chão no jogo (padrão: 530)..
         """
-        # Animação do pássaro
         if self._alive:
             self.__image_index += 1
         if self.__image_index >= 30:
             self.__image_index = 0
         self.image = bird_images[self.__image_index // 10]
-
-        # Atualização da velocidade vertical
         self.__vel += 0.5
         if self.__vel > 7:
             self.__vel = 7
@@ -100,7 +94,6 @@ class Bird(Player):
 
         # Alteração da orientação do pássaro
         self.image = pygame.transform.rotate(self.image, self.__vel * -7)
-
 
 
 class Ground(pygame.sprite.Sprite):
@@ -357,7 +350,6 @@ class CollisionDetector:
                              screen_height // 2 - game_over_image.get_height() // 2))
 
 
-
 class Menu:
     """
     Classe responsável por gerenciar o menu inicial do jogo FlappyBird.
@@ -419,4 +411,3 @@ class Menu:
         self.screen.blit(bird_images[0], self.__bird_start_position)
         self.screen.blit(start_image, (screen_width // 2 - start_image.get_width() // 2,
                                        screen_height // 2 - start_image.get_height() // 2))
-
