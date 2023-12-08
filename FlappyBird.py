@@ -72,7 +72,7 @@ class FlappyBird(Minigame_abs):
     - ``run(self)``:
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
     """
-    
+
     def __init__(self, screen):
         """
         Inicializa as variáveis necessárias para a criação do jogo
@@ -215,18 +215,11 @@ class FlappyBird(Minigame_abs):
         """
         keys = pygame.key.get_pressed()
 
-        # Caso o jogo não tenha começado, desenhasmos o menu
+        # Caso o jogo não tenha começado, desenhamos o menu
         if not self.__game_started:
             self.__menu.draw()
-
             if keys[pygame.K_SPACE]:
-                self.current_delay -= 1
-            else:
-                self.current_delay = self.start_delay_duration
-
-            if self.current_delay <= 0:
                 self.__game_started = True
-                self.current_delay = self.start_delay_duration
         
         # Se o passaro não estiver vivo e a tecla R é pressionada, o jogo é restaurado
         elif not self.__bird.sprite._alive and keys[pygame.K_r] :
