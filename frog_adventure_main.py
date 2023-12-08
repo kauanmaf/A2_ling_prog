@@ -1,4 +1,4 @@
-from settings import *
+from settings_frog import *
 import pygame
 from classes_base_frog import *
 from pygame.locals import *
