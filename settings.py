@@ -16,8 +16,11 @@ clock = pygame.time.Clock()
 FPS = 60
 
 # Construindo as variáveis do jogo
+SCROLL_THRESH = 200
 GRAVITY = 1
 MAX_PLATFORMS = 10
+scroll = 0
+background_scroll = 0
 
 # Definindo as cores
 WHITE = (255, 255, 255)
@@ -26,4 +29,3 @@ WHITE = (255, 255, 255)
 jumper_image = pygame.image.load("endless_vertical_platformer_assets/jumper.png")
 background_image = pygame.image.load("endless_vertical_platformer_assets/background.png")
 platform_image = pygame.image.load("endless_vertical_platformer_assets/platform.png")
-

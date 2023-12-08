@@ -2,6 +2,7 @@ import pygame
 import random
 from settings import *
 from endless_vertical_platformer import *
+from utils import draw_background
 
 # Inicializando o pygame
 pygame.init()
@@ -14,10 +15,20 @@ while run:
     
     clock.tick(FPS)
     
-    jumpy.move()
-    
+    scroll = jumpy.move()
+   
     # Desenhando o plano de fundo
-    screen.blit(background_image, (0, 0))
+    background_scroll += scroll
+    if background_scroll >= 600:
+        # Redefinindo a rolagem da imagem de fundo
+        background_scroll = 0
+    draw_background(background_scroll)
+    
+    # Desenhando limite de rolagem temporário
+    pygame.draw.line(screen, WHITE, (0, SCROLL_THRESH), (SCREEN_WIDTH, SCROLL_THRESH))
+    
+    # Atualizando as plataformas
+    platform_group.update(scroll)
     
     # Desenhando sprites do player
     platform_group.draw(screen)

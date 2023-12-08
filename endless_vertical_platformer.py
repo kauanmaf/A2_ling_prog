@@ -1,7 +1,8 @@
 import pygame
 import random
 from settings import *
-from abstract import *   
+from abstract import *
+from utils import draw_background
 
 class Jumper(Player):
     def __init__(self, x, y ):
@@ -15,6 +16,7 @@ class Jumper(Player):
         
     def move(self):
         # Redefinindo variáveis
+        scroll = 0
         dx = 0
         dy = 0
         
@@ -52,10 +54,18 @@ class Jumper(Player):
         if self.rect.bottom + dy > SCREEN_HEIGHT:
             dy = 0
             self.vel_y = - 20
+
+        # Verificando se o jogador saltou para o topo da tela
+        if self.rect.top <= SCROLL_THRESH:
+            # Averiguando se o jogador está pulando
+            if self.vel_y < 0:  
+                scroll = - dy
             
         # Atualizando a posição do retângulo
         self.rect.x += dx
-        self.rect.y += dy    
+        self.rect.y += dy + scroll
+        
+        return scroll   
 
     def draw(self):
         screen.blit(pygame.transform.flip(self.image, self.flip, False), (self.rect.x - 13, self.rect.y - 5))
@@ -69,6 +79,11 @@ class Platform(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         
+    def update(self, scroll):
+       # Atualizando a posição vertical das plataformas
+       self.rect.y += scroll  
+            
+        
 # Elaborando grupos de sprites
 platform_group = pygame.sprite.Group()
 
@@ -76,6 +91,6 @@ platform_group = pygame.sprite.Group()
 for random_platform in range(MAX_PLATFORMS):
     random_platform_width = random.randint(40, 60)
     random_platform_x = random.randint(0, SCREEN_WIDTH - random_platform_width)
-    random_platform_y = random_platform * random.randint(80, 120)
+    random_platform_y = random_platform * random.randint(80, 120) - 700
     platform = Platform(random_platform_x, random_platform_y, random_platform_width)
     platform_group.add(platform)
