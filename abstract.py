@@ -4,12 +4,8 @@ import pygame
 from abc import ABC
 
 
-class Minigame(ABC):
+class Minigame_abs(ABC):
     "Classe abstrata que serve para todos os minigames"
-
-    def __init__(self):
-        "Serve para iniciar a classe do minijogo"
-        ...
 
     def update(self):
         "Atualiza o estado do minijogo a cada quadro"

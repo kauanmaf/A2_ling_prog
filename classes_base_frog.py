@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-from settings import *
+from settings_frog import *
 
 pygame.init()
 

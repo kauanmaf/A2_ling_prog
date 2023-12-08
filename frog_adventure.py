@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-from settings import *
+from settings_frog import *
 
 pygame.init()
 
@@ -179,6 +179,8 @@ while running:
                     # exit the loops
                     fg_gameover = False
                     running = False
+
+    pygame.display.set_caption('A Frog Journey')
 
     pygame.display.update()
 
