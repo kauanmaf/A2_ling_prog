@@ -1,7 +1,7 @@
 #"Arquivo que define as classes gerais as quais serão usadas"
 
 import pygame
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class Minigame_abs(ABC):
@@ -25,8 +25,9 @@ class Player(ABC, pygame.sprite.Sprite):
 
     def __init__(self):
         "Serve para iniciar o jogo"
-        ...
+        super().__init__()
 
+    @abstractmethod
     def update(self): 
         "Serve para atualizar quando algo acontece com o player"
         ...

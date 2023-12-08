@@ -4,7 +4,7 @@ from FlappyBird import FlappyBird
 import sys
 
 
-# Configurando o jogo
+# Configurando o jogo                                     
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
@@ -16,7 +16,7 @@ pygame.display.set_caption("Mini Arcade")
 # making the loop while to start
 while True:
     # Configurando a taxa de atualização do jogo
-    clock.tick(100)
+    clock.tick(60)
 
     # Configurando o fundo da tela
     screen.fill((0, 0, 0))
