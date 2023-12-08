@@ -6,6 +6,9 @@ pygame.init()
 
 screen_width = 1280
 screen_height = 720
+screen_size = (screen_width, screen_height)
+screen = pygame.display.set_mode(screen_size)
+pygame.display.set_caption('A Frog Journey')
 
 # assets frog game
 fg_background1 = pygame.image.load("./assets/background1.png")
@@ -20,6 +23,8 @@ dead_frog = pygame.image.load("./assets/dead_frog'.png")
 
 #first background image
 fg_current_image = fg_background1
+
+obstacle_images = [lilypad1, lilypad2, lilypad3, alligator]
 
 #sound effects frog game
 
@@ -42,7 +47,7 @@ right_lane = 800
 lanes = [left_lane, center_lane, right_lane]
 
 # player's starting coordinates
-fg_player_x = center_lane
+fg_player_x = 640
 fg_player_y = 640
 
 fg_target_lane = center_lane
