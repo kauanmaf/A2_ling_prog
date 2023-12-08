@@ -1,5 +1,4 @@
 import pygame
-import sys
 import random
 from settings import *
 from abstract import *
@@ -79,12 +78,13 @@ class FlappyBird(Minigame_abs):
         """
         Inicializa as variáveis necessárias para a criação do jogo
         """
+        super().__init__()
         # Como todas as variáveis serão utilizadas apenas dentro dessa classe, podemos utiliza-las como atributos protegidos
         self.__screen = screen
 
         self.__score = 0
-        self.__pipe_timer = 100
-        self.__scroll_speed = 4
+        self.__pipe_timer = 0
+        self.__scroll_speed = 3
         self.__bird_position = (200, screen_height / 2 -100)
 
         self.__menu = Menu(self.__screen, self.__bird_position)

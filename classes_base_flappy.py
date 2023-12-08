@@ -1,6 +1,4 @@
 import pygame
-import sys
-import random
 from settings import *
 from abstract import *
 
