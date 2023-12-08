@@ -2,8 +2,9 @@ from settings import *
 import pygame
 from classes_base_frog import *
 from pygame.locals import *
+from abstract import Minigame_abs
 
-class FrogJourneyGame:
+class FrogJourneyGame(Minigame_abs):
     
     def __init__(self):
 
@@ -46,7 +47,7 @@ class FrogJourneyGame:
 
     def update(self):
         self.move_player()
-        self.spawn_obstacles()
+        self.draw_obstacles()
         self.move_obstacles()
         self.check_collisions()
 
@@ -60,7 +61,7 @@ class FrogJourneyGame:
             if self.player.rect.center[0] < self.fg_target_lane:
                 self.player.rect.center = (self.fg_target_lane, self.player.rect.centery)
 
-    def spawn_obstacles(self):
+    def draw_obstacles(self):
         if len(self.obstacle_group) < 2:
             add_obstacle = True
             for obstacle in self.obstacle_group:
@@ -126,6 +127,8 @@ class FrogJourneyGame:
         self.player.rect.center = [fg_player_x, fg_player_y]
         self.player.visible = True
         self.player.set_alive()
+
+pygame.display.set_caption('A Frog Journey')
 
 if __name__ == "__main__":
     game = FrogJourneyGame()
