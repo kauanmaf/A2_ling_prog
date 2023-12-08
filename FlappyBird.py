@@ -40,12 +40,6 @@ class FlappyBird(Minigame_abs):
     - ``__menu`` (Menu):
         Uma instância da classe Menu para exibir o menu do jogo.
 
-    - ``start_delay_duration`` (int):
-        A duração do atraso inicial do jogo em quadros.
-
-    - ``current_delay`` (int):
-        O contador de duração atual do atraso.
-
     Métodos:
     --------
     - ``create_bird(self)``:
@@ -95,9 +89,6 @@ class FlappyBird(Minigame_abs):
         self.create_bird()
 
         self.__collision_detector = CollisionDetector(self.__bird, self.__ground, self.__pipes, self.__screen)
-
-        self.start_delay_duration = 15  # Set the delay duration (in frames)
-        self.current_delay = self.start_delay_duration
 
     def create_bird(self):
         """
@@ -159,7 +150,6 @@ class FlappyBird(Minigame_abs):
         self.__score = 0
         self.__pipe_timer = 100
         self.game_over = False
-        self.current_restart_delay = self.start_delay_duration
         self.__bird.sprite._alive = True 
 
         self.__collision_detector = CollisionDetector(self.__bird, self.__ground, self.__pipes, self.__screen)
