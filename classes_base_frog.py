@@ -59,7 +59,7 @@ class BackgroundAndScore:
 
     def update_score(self):
         """Essa função atualiza o jogador e aumenta a velocidade dos obtáculos a cada 5
-           pontos
+        pontos
         """
         self.fg_score += 1
         if self.fg_score > 0 and self.fg_score % 5 == 0:

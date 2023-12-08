@@ -7,21 +7,23 @@ from abstract import Minigame_abs
 class FrogJourneyGame(Minigame_abs):
     
     def __init__(self):
-
+        """Essa função inicializa as classes importadas e cria variáveis necessárias 
+        para o funcionamento do jogo
+        """
         self.player = Player1(frog_img, fg_player_x, fg_player_y, speed = 6)
         self.player_group = pygame.sprite.Group()
         self.obstacle_group = pygame.sprite.Group()
         self.collision_detection = CollisionDetection()
         self.background_and_score = BackgroundAndScore()
 
-        # Add the player to the player_group
         self.player_group.add(self.player)
 
-        # Initialize game variables
         self.fg_target_lane = fg_player_x
         self.fg_gameover = False
 
     def run(self):
+        """Essa função abriga o loop que roda o jogo
+        """
         clock = pygame.time.Clock()
         running = True
 
@@ -34,6 +36,8 @@ class FrogJourneyGame(Minigame_abs):
         pygame.quit()
 
     def handle_events(self):
+        """Essa função controla os eventos de fechamento do jogo e aperto de teclas
+        """
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.mixer.music.stop()
@@ -46,12 +50,16 @@ class FrogJourneyGame(Minigame_abs):
                     self.fg_target_lane = right_lane
 
     def update(self):
+        """Função que atualiza os aspectos do jogo a cada quadro
+        """
         self.move_player()
         self.draw_obstacles()
         self.move_obstacles()
         self.check_collisions()
 
     def move_player(self):
+        """Função que define as características de movimentação do player
+        """
         if self.player.rect.center[0] < self.fg_target_lane:
             self.player.rect.x += self.player.speed
             if self.player.rect.center[0] > self.fg_target_lane:
@@ -62,6 +70,8 @@ class FrogJourneyGame(Minigame_abs):
                 self.player.rect.center = (self.fg_target_lane, self.player.rect.centery)
 
     def draw_obstacles(self):
+        """Função que desenha os obstáculos do jogo
+        """
         if len(self.obstacle_group) < 2:
             add_obstacle = True
             for obstacle in self.obstacle_group:
@@ -75,6 +85,8 @@ class FrogJourneyGame(Minigame_abs):
                 self.obstacle_group.add(obstacle)
 
     def move_obstacles(self):
+        """Função que garante a movimentação dos obstáculos
+        """
         for obstacle in self.obstacle_group:
             obstacle.rect.y += fg_speed
             if obstacle.rect.top >= screen_height:
@@ -82,12 +94,16 @@ class FrogJourneyGame(Minigame_abs):
                 self.background_and_score.update_score()
 
     def check_collisions(self):
+        """Função que detecta colisões e realiza ações a respeito
+        """
         if self.collision_detection.check(self.player, self.obstacle_group):
             fg_collision_sound.play()
             self.fg_gameover = True
             self.player.set_dead()
 
     def render(self):
+        """Função que renderiza o jogo
+        """
         screen.fill((0, 0, 0))
 
         self.background_and_score.draw_background(screen)
@@ -120,6 +136,8 @@ class FrogJourneyGame(Minigame_abs):
                         quit()
 
     def reset_game(self):
+        """Função que define aspectos do jogo ao ser resetado
+        """
         self.fg_gameover = False
         self.fg_speed = 2
         self.background_and_score.fg_score = 0
