@@ -51,11 +51,3 @@ fg_player_y = 640
 
 fg_target_lane = center_lane
 
-# frame settings
-clock = pygame.time.Clock()
-fps = 100
-
-# game settings
-fg_gameover = False
-fg_speed = 2
-fg_score = 0

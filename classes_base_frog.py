@@ -55,15 +55,15 @@ class BackgroundAndScore:
         """
         self.__fg_background1 = fg_background1
         self.__fg_background2 = fg_background2
-        self.__fg_score = 0
+        self._fg_score = 0
         self._fg_speed = 2
 
     def update_score(self):
         """Essa função atualiza o jogador e aumenta a velocidade dos obtáculos a cada 5
         pontos
         """
-        self.__fg_score += 1
-        if self.__fg_score > 0 and self.__fg_score % 5 == 0:
+        self._fg_score += 1
+        if self._fg_score > 0 and self._fg_score % 5 == 0:
             self._fg_speed += 1
 
     def draw_background(self, screen):
@@ -79,7 +79,7 @@ class BackgroundAndScore:
         """Essa função deseja o score na tela
         """
         __font = pygame.font.Font(pygame.font.get_default_font(), 30)
-        __text = __font.render('Score: ' + str(self.__fg_score), True, white)
+        __text = __font.render('Score: ' + str(self._fg_score), True, white)
         __text_rect = __text.get_rect()
         __text_rect.center = (640, 40)
         screen.blit(__text, __text_rect)
