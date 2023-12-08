@@ -20,6 +20,7 @@ class FrogJourneyGame(Minigame_abs):
 
         self.fg_target_lane = fg_player_x
         self.fg_gameover = False
+        self.fg_speed = 2
 
     def run(self):
         """Essa função abriga o loop que roda o jogo
@@ -88,7 +89,7 @@ class FrogJourneyGame(Minigame_abs):
         """Função que garante a movimentação dos obstáculos
         """
         for obstacle in self.obstacle_group:
-            obstacle.rect.y += fg_speed
+            obstacle.rect.y += self.background_and_score.fg_speed
             if obstacle.rect.top >= screen_height:
                 obstacle.kill()
                 self.background_and_score.update_score()
@@ -139,7 +140,7 @@ class FrogJourneyGame(Minigame_abs):
         """Função que define aspectos do jogo ao ser resetado
         """
         self.fg_gameover = False
-        self.fg_speed = 2
+        self.background_and_score.fg_speed = 2
         self.background_and_score.fg_score = 0
         self.obstacle_group.empty()
         self.player.rect.center = [fg_player_x, fg_player_y]

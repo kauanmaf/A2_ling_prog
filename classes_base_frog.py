@@ -56,6 +56,7 @@ class BackgroundAndScore:
         self.fg_background1 = fg_background1
         self.fg_background2 = fg_background2
         self.fg_score = 0
+        self.fg_speed = 2
 
     def update_score(self):
         """Essa função atualiza o jogador e aumenta a velocidade dos obtáculos a cada 5
@@ -63,7 +64,7 @@ class BackgroundAndScore:
         """
         self.fg_score += 1
         if self.fg_score > 0 and self.fg_score % 5 == 0:
-            fg_speed += 1
+            self.fg_speed += 1
 
     def draw_background(self, screen):
         """Esse função altera o background após um certo número de ticks

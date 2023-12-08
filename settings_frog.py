@@ -8,7 +8,6 @@ screen_width = 1280
 screen_height = 720
 screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size)
-pygame.display.set_caption('A Frog Journey')
 
 # assets frog game
 fg_background1 = pygame.image.load("./assets/background1.png")
