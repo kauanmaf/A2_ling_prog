@@ -81,16 +81,8 @@ class Platform(pygame.sprite.Sprite):
         
     def update(self, scroll):
        # Atualizando a posição vertical das plataformas
-       self.rect.y += scroll  
-            
-        
-# Elaborando grupos de sprites
-platform_group = pygame.sprite.Group()
+       self.rect.y += scroll 
 
-# Criando plataformas temporárias
-for random_platform in range(MAX_PLATFORMS):
-    random_platform_width = random.randint(40, 60)
-    random_platform_x = random.randint(0, SCREEN_WIDTH - random_platform_width)
-    random_platform_y = random_platform * random.randint(80, 120) - 700
-    platform = Platform(random_platform_x, random_platform_y, random_platform_width)
-    platform_group.add(platform)
+       # Verifique seva plataforma saiu da tela
+       if self.rect.top > SCREEN_HEIGHT:
+           self.kill()

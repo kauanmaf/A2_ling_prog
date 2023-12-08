@@ -10,6 +10,10 @@ pygame.init()
 # Criando a instância do jogador
 jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
 
+# Criando a plataforma inicial
+platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100)
+platform_group.add(platform)
+
 run = True
 while run:
     
@@ -24,8 +28,13 @@ while run:
         background_scroll = 0
     draw_background(background_scroll)
     
-    # Desenhando limite de rolagem temporário
-    pygame.draw.line(screen, WHITE, (0, SCROLL_THRESH), (SCREEN_WIDTH, SCROLL_THRESH))
+    # Gerando plataformas
+    if len(platform_group) < MAX_PLATFORMS:
+        platform_width = random.randint(40, 60)
+        platform_x = random.randint(0, SCREEN_WIDTH - platform_width)
+        platform_y = platform.rect.y - random.randint(80, 120)
+        platform = Platform(platform_x, platform_y, platform_width)
+        platform_group.add(platform)
     
     # Atualizando as plataformas
     platform_group.update(scroll)

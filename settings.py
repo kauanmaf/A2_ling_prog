@@ -29,3 +29,6 @@ WHITE = (255, 255, 255)
 jumper_image = pygame.image.load("endless_vertical_platformer_assets/jumper.png")
 background_image = pygame.image.load("endless_vertical_platformer_assets/background.png")
 platform_image = pygame.image.load("endless_vertical_platformer_assets/platform.png")
+
+# Elaborando grupos de sprites
+platform_group = pygame.sprite.Group()
