@@ -62,11 +62,11 @@ class FrogJourneyGame(Minigame_abs):
         """Função que define as características de movimentação do player
         """
         if self.player.rect.center[0] < self.fg_target_lane:
-            self.player.rect.x += self.player.speed
+            self.player.rect.x += self.player._speed
             if self.player.rect.center[0] > self.fg_target_lane:
                 self.player.rect.center = (self.fg_target_lane, self.player.rect.centery)
         elif self.player.rect.center[0] > self.fg_target_lane:
-            self.player.rect.x -= self.player.speed
+            self.player.rect.x -= self.player._speed
             if self.player.rect.center[0] < self.fg_target_lane:
                 self.player.rect.center = (self.fg_target_lane, self.player.rect.centery)
 
@@ -89,7 +89,7 @@ class FrogJourneyGame(Minigame_abs):
         """Função que garante a movimentação dos obstáculos
         """
         for obstacle in self.obstacle_group:
-            obstacle.rect.y += self.background_and_score.fg_speed
+            obstacle.rect.y += self.background_and_score._fg_speed
             if obstacle.rect.top >= screen_height:
                 obstacle.kill()
                 self.background_and_score.update_score()
@@ -109,7 +109,7 @@ class FrogJourneyGame(Minigame_abs):
 
         self.background_and_score.draw_background(screen)
 
-        if self.player.visible:
+        if self.player._visible:
             self.player_group.draw(screen)
 
         self.obstacle_group.draw(screen)
