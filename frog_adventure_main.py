@@ -77,16 +77,20 @@ class FrogJourneyGame(Minigame_abs):
         """Essa função inicializa as classes importadas e cria variáveis necessárias 
         para o funcionamento do jogo
         """
+
+        #criando instancias das classes
         self.__player = Player1()
         self.__collision_detection = CollisionDetection()
         self.__background = Background()
         self.__score = Score()
 
+        #criando sprite groups para o player e objeto
         self.__player_group = pygame.sprite.Group()
         self.__obstacle_group = pygame.sprite.Group()
 
         self.__player_group.add(self.__player)
 
+        #criando o restante dos atributos necessários para o jogo
         self.__fg_target_lane = fg_player_x
         self.__fg_gameover = False
         self.__fg_speed = 2
@@ -157,7 +161,8 @@ class FrogJourneyGame(Minigame_abs):
                 lane = random.choice(lanes)
                 image = random.choice(obstacle_images)
                 obstacle = Obstacle(image, lane, screen_height / -2)
-                self.__obstacle_group.add(obstacle)
+                self.__obstacle_group.add(obstacle) 
+                # cria um objeto com sprite aleatório em uma lane aleatória
 
     def move_obstacles(self):
         """Função que garante a movimentação dos obstáculos
@@ -194,6 +199,7 @@ class FrogJourneyGame(Minigame_abs):
 
         if self.__fg_gameover:
             screen.blit(death_box, (0, 0))
+            # aparece a tela de gameover
 
         pygame.display.update()
 
@@ -215,6 +221,7 @@ class FrogJourneyGame(Minigame_abs):
     def reset_game(self):
         """Função que define aspectos do jogo ao ser resetado
         """
+        # resetando as configurações para recomeçar o jogo
         self.__fg_gameover = False
         self.__score._fg_speed = 2
         self.__score._fg_score = 0

@@ -20,35 +20,32 @@ frog_img = pygame.image.load("./assets/froginho.png")
 death_box = pygame.image.load("./assets/deathbox1.png")
 dead_frog = pygame.image.load("./assets/dead_frog'.png")
 
-#first background image
+# first background image
 fg_current_image = fg_background1
 
 obstacle_images = [lilypad1, lilypad2, lilypad3, alligator]
 
-#sound effects frog game
-
-#soundtrack working
+# sound effects frog game
+# soundtrack working
 pygame.mixer.music.load("./assets/a_frog_adventure.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
 
-#collision sound
+# collision sound
 fg_collision_sound = pygame.mixer.Sound("./assets/wet_frog.mp3")
 fg_collision_sound.set_volume(0.5)
 
-# colors
+# cores 
 white = (255, 255, 255)
 
-# lane coordinates
+# frog game lane coordinates
 left_lane = 480
 center_lane = 640
 right_lane = 800
 lanes = [left_lane, center_lane, right_lane]
 
-# player's starting coordinates
+# frog starting coordinates
 fg_player_x = 640
 fg_player_y = 640
 
-fg_target_lane = center_lane
 
-# frame settings
