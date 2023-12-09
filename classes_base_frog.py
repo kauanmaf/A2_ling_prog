@@ -114,7 +114,7 @@ class Obstacle(pygame.sprite.Sprite):
     - ``draw_obstacles(self)``:
         Função que desenha os obstáculos no jogo
     """
-    def __init__(self, image, x, y, obstacle_group):
+    def __init__(self, image: pygame.Surface, x: int, y: int, obstacle_group: pygame.sprite.Group):
         """Essa função inicializa os obstáculos do jogo
         """
         super().__init__()
@@ -164,7 +164,7 @@ class CollisionDetection:
     
     """
     @staticmethod
-    def check(player, obstacle_group):
+    def check(player: Player1, obstacle_group: pygame.sprite.Group):
         """Essa função checa se o jogador colidiu com um obstáculo
         """
         return pygame.sprite.spritecollide(player, obstacle_group, True)
@@ -205,7 +205,7 @@ class Background:
         self.__fg_background1 = fg_background1
         self.__fg_background2 = fg_background2
 
-    def draw_background(self, screen):
+    def draw_background(self, screen: pygame.Surface):
         """Essa função altera o background após um certo número de ticks
         """
         if pygame.time.get_ticks() % 2000 < 1000:
@@ -275,7 +275,7 @@ class Score:
         if self._fg_score > 0 and self._fg_score % 5 == 0:
             self._fg_speed += 1
 
-    def draw_score(self, screen):
+    def draw_score(self, screen: pygame.Surface):
         """Essa função deseja o score na tela
 
         Parâmetros:

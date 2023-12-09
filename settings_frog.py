@@ -23,6 +23,7 @@ dead_frog = pygame.image.load("./assets_frog/dead_frog'.png")
 # first background image
 fg_current_image = fg_background1
 
+# list of obstacle images
 obstacle_images = [lilypad1, lilypad2, lilypad3, alligator]
 
 # sound effects frog game

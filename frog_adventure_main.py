@@ -179,6 +179,7 @@ class FrogJourneyGame(Minigame_abs):
                     elif event.key == K_n:
                         pygame.quit()
                         quit()
+                #teclas para reiniciar e sair do jogo
 
     def reset_game(self):
         """Função que define aspectos do jogo ao ser resetado
