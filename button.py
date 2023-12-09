@@ -1,4 +1,40 @@
 class Button():
+	"""
+	Classe cujas instâncias são os botões que fazem o menu funcionar
+
+	Atributos:
+	----------
+	- ``__image`` (pygame.Surface):
+		A imagem que representa o botão
+	- ``__x_pos (int):``
+		A posição do botão ao longo do eixo x
+	- ``__y_pos (int):``
+		A posição do botão ao longo do eixo y
+	- ``__font (pygame.Font):``
+		A fonte do texto do botão
+	- ``__base_color (pygame.Color)``
+		A cor normal do texto do botão
+	- ``__text_input (str):``
+		O texto do botão
+	- ``__text (pygame.Surface):``
+		O texto com a cor normal que deve ter
+	- ``-rect (pygame.Rect)``
+		O retângulo que representa a dimensão e a posição da imagem na tela
+	- ``text_rec (pygame.rect)``
+		O retângulo que representa a dimensão e a posição da imagem na tela
+
+	Métodos:
+	--------
+	- ``update(screen)``:
+		Atualiza o estado do botão, colocando-o na tela.
+
+	- ``checkForInput(position)``:
+		Verifica se o mouse está dentro do range do retângulo 
+
+	- ``update(screen)``:
+		Atualiza o estado do botão, colocando-o na tela.
+	"""
+
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
 		self.image = image
 		self.x_pos = pos[0]

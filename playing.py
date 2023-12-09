@@ -6,10 +6,12 @@ from settings import *
 from utils import *
 
 
-BACKGROUND = pygame.image.load("assets/menu-background.jpeg")
-
-
 def playing_flappybird(screen):
+    """
+    Função que define as configurações necessárias e inicia o flappy bird
+
+    :param surface screen: tela onde o jogo vai ser iniciado
+    """
     pygame.display.set_caption("Flappy Bird")
     
     clock = pygame.time.Clock()
