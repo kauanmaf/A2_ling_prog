@@ -6,7 +6,73 @@ from abstract import Minigame_abs
 import sys
 
 class FrogJourneyGame(Minigame_abs):
+    """
+    Uma classe representando o jogo Frog Adventure
     
+    Atributos:
+    ----------
+    - ``__player`` (Player1):
+        Instância da classe Player1.
+
+    - ``__collision_detection`` (CollisionDetection):
+        Instância da classe CollisionDetection.
+
+    - ``__score`` (Score):
+        Instância da classe Score.
+
+    - ``__background`` (Background):
+        Instância da classe Background.
+
+    - ``__player_group`` (pygame.sprite.Group):
+        Grupo que contém o sprite do player.
+
+    - ``__obstacle_group`` (pygame.sprite.Group):
+        Grupo de contém os sprites dos objetos.
+
+    - ``__fg_target_lane`` (int):
+        coordenada da lane para movimentação do player.
+
+    - ``__fg_gameover`` (bool):
+        Utilizada para ações quando o player perde.
+
+    - ``__fg_speed`` (int):
+        Velocidade dos obstáculos.
+
+    - ``__clock`` (pygame.time):
+        método para controle dos ticks.
+
+    - ``__running`` (bool):
+        Variável que será True caso o jogo esteje rodando.
+        
+    Métodos:
+    --------
+    - ``run(self)``:
+        Essa função abriga o loop que roda o jogo.
+
+    - ``handle_events(self)``:
+        Essa função controla os eventos de fechamento do jogo e aperto de teclas.    
+
+    - ``update(self)``:
+        Função que atualiza os aspectos do jogo a cada quadro.   
+
+    - ``move_player(self)``:
+        Função que define as características de movimentação do player.   
+
+    - ``draw_obstacles(self)``:
+        Função que desenha os obstáculos do jogo.
+
+    - ``move_obstacles(self)``:
+        Função que garante a movimentação dos obstáculos.
+
+    - ``check_collisions(self)``:
+        Função que detecta colisões e realiza ações a respeito.
+
+    - ``render(self)``:
+        Função que renderiza o jogo.
+
+    - ``reset_game(self)``:
+        Função que define aspectos do jogo ao ser resetado
+    """
     def __init__(self):
         """Essa função inicializa as classes importadas e cria variáveis necessárias 
         para o funcionamento do jogo
@@ -27,13 +93,12 @@ class FrogJourneyGame(Minigame_abs):
 
         self.__clock = pygame.time.Clock()
         self.__running = True
-        self.__fps = 100
         
     def run(self):
         """Essa função abriga o loop que roda o jogo
         """
         while self.__running:
-            self.__clock.tick(self.__fps)
+            self.__clock.tick(100)
             self.handle_events()
             self.update()
             self.render()
@@ -56,7 +121,7 @@ class FrogJourneyGame(Minigame_abs):
                     self.__fg_target_lane = right_lane
 
     def update(self):
-        """Função que atualiza os aspectos do jogo a cada quadro
+        """Função que atualiza os aspectos do jogo a cada quadro.
         """
         self.move_player()
         self.draw_obstacles()
@@ -127,7 +192,7 @@ class FrogJourneyGame(Minigame_abs):
         pygame.display.update()
 
         while self.__fg_gameover:
-            self.__clock.tick(self.__fps)
+            self.__clock.tick(100)
 
             for event in pygame.event.get():
                 if event.type == QUIT:
