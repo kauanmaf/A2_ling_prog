@@ -5,7 +5,8 @@ crocodile: obtido utilizando o prompt "top down pixel art 16 bit underwater simp
 no criador de imagens do bing.
 
 froginho: obtido utilizando o prompt "16x16 simple pixel  frog top-down back view png" no criador
-de imagens do bing
+de imagens do bing + pixel art de prancha obtida no site FreePik e criada por @collaborapix. Link:
+https://www.freepik.com/premium-vector/pixel-art-illustration-surf-board-pixelated-beach-surf-beach-surd-board-icon-pixelated_80858387.htm
 
 dead_frog: via edição do froginho
 
