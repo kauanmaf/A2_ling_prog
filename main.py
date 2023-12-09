@@ -15,6 +15,9 @@ jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
 platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
 platform_group.add(platform)
 
+# Construindo a spritesheet do inimigo
+enemy_sheet = SpriteSheet(enemy_sheet_image)
+
 run = True
 while run:
     
@@ -46,6 +49,14 @@ while run:
         # Atualizando as plataformas
         platform_group.update(scroll)
         
+        # Gerando inimigos
+        if len(enemy_group) == 0:
+            enemy = Enemy(SCREEN_WIDTH, 100, enemy_sheet, 1.5)
+            enemy_group.add(enemy)
+            
+        # Atualizando os inimigos
+        enemy_group.update()
+        
         # Atualizando a pontuação
         if scroll > 0:
             score += scroll
@@ -56,6 +67,7 @@ while run:
             
         # Desenhando sprites do player
         platform_group.draw(screen)
+        enemy_group.draw(screen)
         jumpy.draw()
         
         # Desenhando o painel

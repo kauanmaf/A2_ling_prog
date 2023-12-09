@@ -95,3 +95,43 @@ class Platform(pygame.sprite.Sprite):
         # Verifique seva plataforma saiu da tela
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
+            
+class SpriteSheet():
+    def __init__(self, sheet_image):
+        self.sheet = sheet_image
+        
+    def get_image(self, frame, width, height, scale, colour):
+        image = pygame.Surface((width, height))
+        image.blit(self.sheet, (0, 0), ((frame * width), 0, width, height))
+        image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+        image.set_colorkey(colour)
+        
+        return image
+        
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, SCREEN_WIDTH, y, sprite_sheet, scale):
+        pygame.sprite.Sprite.__init__(self)
+        # Definindo variáveis
+        self.direction = random.choice([1, - 1])
+        if self.direction == 1:
+            self.flip = True
+        else:
+            self.flip = False
+        # Carregando imagens da spritesheet
+        image = sprite_sheet.get_image(0, 32, 32, scale, (0, 0, 0))
+        image = pygame.transform.flip(image, self.flip, False)
+        image.set_colorkey((0, 0, 0))
+        self.image = image 
+        self.rect = self.image.get_rect()       
+        if self.direction == 1:
+            self.rect.x = 0
+        else:
+            self.rect.x = SCREEN_WIDTH
+        self.rect.y = y
+        
+    def update(self):
+        # Movendo o inimigo
+        self.rect.x += self.direction * 2
+        # Verificando se o inimigo saiu da tela
+        if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
+            self.kill()

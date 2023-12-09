@@ -46,5 +46,9 @@ jumper_image = pygame.image.load("endless_vertical_platformer_assets/jumper.png"
 background_image = pygame.image.load("endless_vertical_platformer_assets/background.png")
 platform_image = pygame.image.load("endless_vertical_platformer_assets/platform.png")
 
+# Carregando a imagem do inimigo
+enemy_sheet_image = pygame.image.load("endless_vertical_platformer_assets/enemy.png")
+
 # Elaborando grupos de sprites
 platform_group = pygame.sprite.Group()
+enemy_group = pygame.sprite.Group()
