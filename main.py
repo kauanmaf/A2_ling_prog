@@ -81,7 +81,7 @@ while run:
         if jumpy.rect.top > SCREEN_HEIGHT:
             game_over = True
             death_sound.play()
-        # Verificandovse há colisão com inimigos
+        # Verificando se há colisão com inimigos
         if pygame.sprite.spritecollide(jumpy, enemy_group, False):
             if pygame.sprite.spritecollide(jumpy, enemy_group, False, pygame.sprite.collide_mask):
                 game_over = True

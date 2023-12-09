@@ -5,7 +5,53 @@ from abstract import *
 from utils import draw_background
 
 class Jumper(Player):
+    """
+    A classe tem como objetivo criar e controlar o saltador do jogo
+    
+    Atributos:
+    ----------
+        image: pygame.Surface
+            A imagem que representa o saltador
+        
+        width: int
+            A largura do saltador
+            
+        height: int
+            A altura do saltador
+            
+        rect: pygame.Rect
+            O retângulo que contém a posição e a dimensão do saltador
+            
+        rect.center: tupla
+            As coordenadas x e y do saltador
+            
+        vel_y: int
+            A velocidade vertical do jogador
+            
+        flit: bool
+            A rotação do saltador
+            
+    Métodos:
+    --------
+        move
+            Realiza os movimentos do saltador
+            
+        draw
+            Plota o saltador
+        
+    """
     def __init__(self, x, y ):
+        """
+        Inicializa a classe Jumper
+            
+        Parâmetros:
+        -----------
+            x: int
+                Coordenada x do saltador
+
+            y: int
+                Coordenada y do saltador    
+        """
         self.image = pygame.transform.scale(jumper_image, (45, 45))
         self.width = 25
         self.height = 40
@@ -15,6 +61,14 @@ class Jumper(Player):
         self.flip = False
         
     def move(self):
+        """
+        A função realiza os movimentos horizontais e verticais do jogador
+        
+        Retorno:
+        --------
+            scroll: int
+                rolagem da imagem            
+        """
         # Redefinindo variáveis
         scroll = 0
         dx = 0
@@ -66,9 +120,26 @@ class Jumper(Player):
         return scroll   
 
     def draw(self):
+        """
+        A função desenha o saltador
+        """
         screen.blit(pygame.transform.flip(self.image, self.flip, False), (self.rect.x - 13, self.rect.y - 5))
         
 class Platform(pygame.sprite.Sprite):
+    """
+    A classe é responsável pela criação e atualização das plataformas do jogo
+    
+    Atributos:
+    ----------
+        image: pygame.Surface
+            A imagem da plataforma
+        movement: bool
+            A mobilidade da plataforma
+        move_counter: int
+            O contador de movimento
+        direction: int
+            O sentido da direção horizontal da plataforma
+    """
     def __init__(self, x, y, width, movement):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(platform_image, (width, 10))
