@@ -28,6 +28,7 @@ fade_counter = 0
 # Definindo as cores
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+PANEL = (184, 230, 253)
 
 # Definindo as fontes
 font_small = pygame.font.SysFont("Lucida Sans", 20)

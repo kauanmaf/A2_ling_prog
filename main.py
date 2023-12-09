@@ -40,9 +40,16 @@ while run:
         # Atualizando as plataformas
         platform_group.update(scroll)
         
+        # Atualizando a pontuação
+        if scroll > 0:
+            score += scroll
+            
         # Desenhando sprites do player
         platform_group.draw(screen)
         jumpy.draw()
+        
+        # Desenhando o painel
+        draw_panel()
         
         # Verificando o fim do jogo
         if jumpy.rect.top > SCREEN_HEIGHT:

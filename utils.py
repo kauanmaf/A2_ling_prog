@@ -7,6 +7,14 @@ def draw_text(text, font, text_col, x, y ):
     """
     text_image = font.render(text, True, text_col)
     screen.blit(text_image, (x, y))
+    
+def draw_panel():
+    """
+    A função desenha o painel de pontuação na tela do jogo
+    """ 
+    pygame.draw.rect(screen, PANEL, (0, 0, SCREEN_WIDTH, 30))
+    pygame.draw.line(screen, WHITE, (0, 30), (SCREEN_WIDTH, 30), 2)
+    draw_text("SCORE: " + str(score), font_small, WHITE, 0, 0)   
 
 def draw_background(background_scroll):
     """
