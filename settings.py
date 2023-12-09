@@ -21,9 +21,15 @@ GRAVITY = 1
 MAX_PLATFORMS = 10
 scroll = 0
 background_scroll = 0
+game_over = False
+score = 0
 
 # Definindo as cores
 WHITE = (255, 255, 255)
+
+# Definindo as fontes
+font_small = pygame.font.SysFont("Lucida Sans", 20)
+font_big = pygame.font.SysFont("Lucida Sans", 24)
 
 # Carregando imagens
 jumper_image = pygame.image.load("endless_vertical_platformer_assets/jumper.png")

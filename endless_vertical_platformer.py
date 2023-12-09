@@ -50,11 +50,6 @@ class Jumper(Player):
                         dy = 0
                         self.vel_y = - 20
 
-        # Verificando a colisão com o solo
-        if self.rect.bottom + dy > SCREEN_HEIGHT:
-            dy = 0
-            self.vel_y = - 20
-
         # Verificando se o jogador saltou para o topo da tela
         if self.rect.top <= SCROLL_THRESH:
             # Averiguando se o jogador está pulando
