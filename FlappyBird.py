@@ -73,7 +73,7 @@ class FlappyBird(Minigame_abs):
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
     """
 
-    def __init__(self, screen):
+    def __init__(self, screen: pygame.Surface):
         """
         Inicializa as variáveis necessárias para a criação do jogo
         """
@@ -163,7 +163,7 @@ class FlappyBird(Minigame_abs):
         """
         self.__bird.add(Bird(self.__bird_position))
 
-    def create_ground(self, x_pos_ground = 0, y_pos_ground = 530):
+    def create_ground(self, x_pos_ground:int = 0, y_pos_ground:int = 530):
         """
         Cria um novo grupo de sprites de chão com posições especificadas.
 
@@ -174,7 +174,7 @@ class FlappyBird(Minigame_abs):
         ground_group.add(Ground(x_pos_ground + 2 * ground_image_flappy.get_width(), y_pos_ground, self.__scroll_speed))
         return ground_group  
 
-    def spawn_pipes(self, x_top = 1300, x_bottom = 1300):
+    def spawn_pipes(self, x_top:int = 1300, x_bottom: int = 1300):
         """
         Cria canos em posições específicas com base em um temporizador.
         """

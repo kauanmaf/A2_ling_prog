@@ -28,7 +28,7 @@ class Bird(Player):
 
     Métodos:
     --------
-    - ``update(user_input, y_pos_ground=530)``:
+    - ``update(user_input, y_pos_ground = 530)``:
         Atualiza o estado do pássaro com base na entrada do usuário.
 
     Parâmetros:
@@ -51,7 +51,7 @@ class Bird(Player):
         Parâmetros:
         -----------
         - ``bird_start_position`` (tuple):
-            Posição inicial do pássaro.
+            Tupla com a posição inicial do pássaro (x,y).
         """
         super().__init__()
         # Inicialização dos atributos públicos
@@ -64,7 +64,7 @@ class Bird(Player):
         self._alive = True
     
 
-    def update(self, user_input, y_pos_ground=530):
+    def update(self, user_input, y_pos_ground:int = 530):
         """
      - ``update(user_input, y_pos_ground=530)``:
         Atualiza o estado do pássaro com base na entrada do usuário.
@@ -138,7 +138,7 @@ class Ground(pygame.sprite.Sprite):
     ground = Ground(pos_x, pos_y, scroll_speed)
     ground.update()
     """
-    def __init__(self, pos_x, pos_y, scroll_speed):
+    def __init__(self, pos_x: int, pos_y: int, scroll_speed: int):
         """
         Inicializa a classe Ground.
 
@@ -226,7 +226,7 @@ class Pipe(pygame.sprite.Sprite):
     pipe = Pipe(pos_x, pos_y, image, pipe_type, scroll_speed)
     pipe.update()
     """
-    def __init__(self, pos_x, pos_y, image, pipe_type, scroll_speed):
+    def __init__(self, pos_x: int, pos_y: int, image: pygame.Surface, pipe_type: str, scroll_speed: int):
         """
         Inicializa a classe Pipe
 
@@ -316,7 +316,8 @@ class CollisionDetector:
     collision_detector.check_collisions()
     """
 
-    def __init__(self, bird, ground, pipes, screen):
+    def __init__(self, bird: pygame.sprite.GroupSingle, ground: pygame.sprite.Group, 
+                 pipes: pygame.sprite.Group, screen: pygame.Surface):
         """
         Inicializa a classe CollisionDetector.
 
@@ -378,9 +379,6 @@ class Menu:
     - ``screen`` (pygame.Surface):
         Superfície da tela do jogo.
 
-    - ``clock`` (pygame.time.Clock):
-        Relógio para controle de frames.
-
     - ``__bird_start_position`` (tuple):
         Posição inicial do pássaro.
 
@@ -403,7 +401,7 @@ class Menu:
     menu.draw()
     """
 
-    def __init__(self, screen, bird_start_position):
+    def __init__(self, screen : pygame.Surface , bird_start_position: tuple):
         """
         Inicializa a classe Menu.
 
