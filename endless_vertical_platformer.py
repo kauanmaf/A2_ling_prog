@@ -67,17 +67,31 @@ class Jumper(Player):
         pygame.draw.rect(screen, WHITE, self.rect, 2)
         
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, x, y, width):
+    def __init__(self, x, y, width, movement):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(platform_image, (width, 10))
+        self.movement = movement
+        self.move_counter = random.randint(0, 50)
+        self.direction = random.choice([1, - 1])
+        self.speed = random.randint(1, 2)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         
     def update(self, scroll):
-       # Atualizando a posição vertical das plataformas
-       self.rect.y += scroll 
+        # Movendo a plataforma de um lado para o outro se for uma plataforma móvel
+        if self.movement == True:
+            self.move_counter += 1
+            self.rect.x += self.direction * self.speed
+           
+        # Mudando a direção da plataforma se ela fizer o movimento completo ou colidir com a parede
+        if self.move_counter >= 100 or self.rect.left < 0 or self.rect.right > SCREEN_WIDTH:
+            self.direction *= - 1
+            self.move_counter = 0
+        
+        # Atualizando a posição vertical das plataformas
+        self.rect.y += scroll 
 
-       # Verifique seva plataforma saiu da tela
-       if self.rect.top > SCREEN_HEIGHT:
-           self.kill()
+        # Verifique seva plataforma saiu da tela
+        if self.rect.top > SCREEN_HEIGHT:
+            self.kill()

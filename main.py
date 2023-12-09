@@ -12,7 +12,7 @@ pygame.init()
 jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
 
 # Criando a plataforma inicial
-platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100)
+platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
 platform_group.add(platform)
 
 run = True
@@ -35,7 +35,12 @@ while run:
             platform_width = random.randint(40, 60)
             platform_x = random.randint(0, SCREEN_WIDTH - platform_width)
             platform_y = platform.rect.y - random.randint(80, 120)
-            platform = Platform(platform_x, platform_y, platform_width)
+            platform_type = random.randint(1, 2)
+            if platform_type == 1 and score > 750:
+                platform_movement = True
+            else:
+                platform_movement = False
+            platform = Platform(platform_x, platform_y, platform_width, platform_movement)
             platform_group.add(platform)
         
         # Atualizando as plataformas
@@ -54,7 +59,9 @@ while run:
         jumpy.draw()
         
         # Desenhando o painel
-        draw_panel()
+        pygame.draw.rect(screen, PANEL, (0, 0, SCREEN_WIDTH, 30))
+        pygame.draw.line(screen, WHITE, (0, 30), (SCREEN_WIDTH, 30), 2)
+        draw_text("SCORE: " + str(score), font_small, WHITE, 0, 0)
         
         # Verificando o fim do jogo
         if jumpy.rect.top > SCREEN_HEIGHT:
@@ -87,7 +94,7 @@ while run:
                 # Redefinindo as plataformas
                 platform_group.empty()
                 # Criando a plataforma inicial
-                platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100)
+                platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
                 platform_group.add(platform)
 
     # Elaborando manipulador de eventos
