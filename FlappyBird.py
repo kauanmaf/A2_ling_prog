@@ -72,7 +72,6 @@ class FlappyBird(Minigame_abs):
     - ``run(self)``:
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
     """
-
     def __init__(self, screen: pygame.Surface):
         """
         Inicializa as variáveis necessárias para a criação do jogo
@@ -155,7 +154,6 @@ class FlappyBird(Minigame_abs):
             bird_position_ (tuple): As novas coordenadas da posição inicial do pássaro.
         """
         self.__bird_position = bird_position_
-
 
     def create_bird(self):
         """
