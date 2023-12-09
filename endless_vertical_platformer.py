@@ -60,11 +60,13 @@ class Jumper(Player):
         self.rect.x += dx
         self.rect.y += dy + scroll
         
+        # Atualizando a máscara
+        self.mask = pygame.mask.from_surface(self.image)
+        
         return scroll   
 
     def draw(self):
         screen.blit(pygame.transform.flip(self.image, self.flip, False), (self.rect.x - 13, self.rect.y - 5))
-        pygame.draw.rect(screen, WHITE, self.rect, 2)
         
 class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, width, movement):

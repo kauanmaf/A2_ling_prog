@@ -78,6 +78,10 @@ while run:
         # Verificando o fim do jogo
         if jumpy.rect.top > SCREEN_HEIGHT:
             game_over = True
+        # Verificandovse há colisão com inimigos
+        if pygame.sprite.spritecollide(jumpy, enemy_group, False):
+            if pygame.sprite.spritecollide(jumpy, enemy_group, False, pygame.sprite.collide_mask):
+                game_over = True
     else:
         if fade_counter < SCREEN_WIDTH:
             fade_counter += 5
