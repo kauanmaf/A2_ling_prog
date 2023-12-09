@@ -53,13 +53,7 @@ class FrogJourneyGame(Minigame_abs):
         Essa função controla os eventos de fechamento do jogo e aperto de teclas.    
 
     - ``update(self)``:
-        Função que atualiza os aspectos do jogo a cada quadro.   
-
-    - ``move_player(self)``:
-        Função que define as características de movimentação do player.   
-
-    - ``draw_obstacles(self)``:
-        Função que desenha os obstáculos do jogo.
+        Função que atualiza os aspectos do jogo a cada quadro.    
 
     - ``move_obstacles(self)``:
         Função que garante a movimentação dos obstáculos.
@@ -84,17 +78,15 @@ class FrogJourneyGame(Minigame_abs):
         self.__background = Background()
         self.__score = Score()
 
-        #criando sprite groups para o player e objeto
+        #criando sprite groups para o player
         self.__player_group = pygame.sprite.Group()
+        self.__player_group.add(self.__player)
         self.__obstacle_group = pygame.sprite.Group()
 
-        self.__player_group.add(self.__player)
+        self.__obstacles = Obstacle(image, lane, screen_height / -2, self.__obstacle_group)
 
         #criando o restante dos atributos necessários para o jogo
-        self.__fg_target_lane = fg_player_x
         self.__fg_gameover = False
-        self.__fg_speed = 2
-
         self.__clock = pygame.time.Clock()
         self.__running = True
         
@@ -121,48 +113,18 @@ class FrogJourneyGame(Minigame_abs):
             #Determinaremos a target_lane do player
             if event.type == KEYDOWN:
                 if event.key == K_LEFT and self.__player.rect.center[0] > left_lane:
-                    self.__fg_target_lane = left_lane
+                    self.__player._target_lane = left_lane
                 elif event.key == K_RIGHT and self.__player.rect.center[0] < right_lane:
-                    self.__fg_target_lane = right_lane
+                    self.__player._target_lane = right_lane
+                   
 
     def update(self):
         """Função que atualiza os aspectos do jogo a cada quadro.
         """
-        self.move_player()
-        self.draw_obstacles()
+        self.__player.move_player()
+        self.__obstacles.draw_obstacles()
         self.move_obstacles()
         self.check_collisions()
-
-    def move_player(self):
-        """Função que define as características de movimentação do player
-        """
-
-        #Desloca o player para a target lane com base nas coordenadas x
-        if self.__player.rect.center[0] < self.__fg_target_lane:
-            self.__player.rect.x += self.__player._speed
-            if self.__player.rect.center[0] > self.__fg_target_lane:
-                self.__player.rect.center = (self.__fg_target_lane, self.__player.rect.centery)
-        elif self.__player.rect.center[0] > self.__fg_target_lane:
-            self.__player.rect.x -= self.__player._speed
-            if self.__player.rect.center[0] < self.__fg_target_lane:
-                self.__player.rect.center = (self.__fg_target_lane, self.__player.rect.centery)
-
-    def draw_obstacles(self):
-        """Função que desenha os obstáculos do jogo
-        """
-        if len(self.__obstacle_group) < 2:
-            add_obstacle = True
-            for obstacle in self.__obstacle_group:
-                if obstacle.rect.top < obstacle.rect.height * 1.5:
-                    add_obstacle = False
-                    #não permite que obstaculos sejam criados muito próximos
-
-            if add_obstacle:
-                lane = random.choice(lanes)
-                image = random.choice(obstacle_images)
-                obstacle = Obstacle(image, lane, screen_height / -2)
-                self.__obstacle_group.add(obstacle) 
-                # cria um objeto com sprite aleatório em uma lane aleatória
 
     def move_obstacles(self):
         """Função que garante a movimentação dos obstáculos

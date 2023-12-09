@@ -44,6 +44,9 @@ center_lane = 640
 right_lane = 800
 lanes = [left_lane, center_lane, right_lane]
 
+lane = random.choice(lanes)
+image = random.choice(obstacle_images)
+
 # frog starting coordinates
 fg_player_x = 640
 fg_player_y = 640

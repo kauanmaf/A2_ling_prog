@@ -26,6 +26,9 @@ class Player1(pygame.sprite.Sprite):
     - ``rect`` (pygame.Rect):
         O retângulo que representa a posição e dimensões do sapo na tela.
 
+    - ``target_lane`` (int):
+        Coordenadas da lane a qual o player deseja ir.
+
     Métodos:
     --------
     - ``set_dead(self)``:
@@ -33,6 +36,9 @@ class Player1(pygame.sprite.Sprite):
 
     - ``set_alive(self)``:
         Faz o reespawn do sapo.
+
+    - ``move_player(self)``:
+        Função que define as características de movimentação do player.
 
     Usos:
     -----
@@ -43,6 +49,8 @@ class Player1(pygame.sprite.Sprite):
     reset.game()
     frog.set_alive()
 
+    if key[pygame.K_LEFT]:
+        move_player()
     """
     def __init__(self):
         """Essa função inicializa o player
@@ -54,6 +62,7 @@ class Player1(pygame.sprite.Sprite):
         self.image = frog_img
         self.rect = self.image.get_rect()
         self.rect.center = [fg_player_x, fg_player_y]
+        self._target_lane = fg_player_x
 
     def set_dead(self):
         """Essa função seta o player como morto após colidir com um obstáculo
@@ -69,6 +78,18 @@ class Player1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [640, 640]
     
+    def move_player(self):
+        """Função que define as características de movimentação do player
+        """
+        #Desloca o player para a target lane com base nas coordenadas x
+        if self.rect.center[0] < self._target_lane:
+            self.rect.x += self._speed
+            if self.rect.center[0] > self._target_lane:
+                self.rect.center = (self._target_lane, self.rect.centery)
+        elif self.rect.center[0] > self._target_lane:
+            self.rect.x -= self._speed
+            if self.rect.center[0] < self._target_lane:
+                self.rect.center = (self._target_lane, self.rect.centery)
 
 class Obstacle(pygame.sprite.Sprite):
     """
@@ -81,14 +102,43 @@ class Obstacle(pygame.sprite.Sprite):
 
     - ``rect`` (pygame.Rect):
         O retângulo que representa a posição e dimensões dos obstáculos na tela.
+
+    - ``__obstacle_group`` (pygame.sprite.Group):
+        Grupo de sprites dos objetos.
+
+    - ``lane`` (int):
+        Coordenada das 3 lanes.
+
+    Métodos:
+    --------
+    - ``draw_obstacles(self)``:
+        Função que desenha os obstáculos no jogo
     """
-    def __init__(self, image, x, y):
+    def __init__(self, image, x, y, obstacle_group):
         """Essa função inicializa os obstáculos do jogo
         """
         super().__init__()
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
+        self.__obstacle_group = obstacle_group
+
+    def draw_obstacles(self):
+        """Função que desenha os obstáculos do jogo
+        """
+        if len(self.__obstacle_group) < 2:
+            add_obstacle = True
+            for obstacle in self.__obstacle_group:
+                if obstacle.rect.top < obstacle.rect.height * 1.5:
+                    add_obstacle = False
+                    #não permite que obstaculos sejam criados muito próximos
+
+            if add_obstacle:
+                lane = random.choice(lanes)
+                image = random.choice(obstacle_images)
+                obstacle = Obstacle(image, lane, screen_height / -2, self.__obstacle_group)
+                self.__obstacle_group.add(obstacle) 
+                # cria um objeto com sprite aleatório em uma lane aleatória
 
 class CollisionDetection:
     """
