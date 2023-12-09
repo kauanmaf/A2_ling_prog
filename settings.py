@@ -1,4 +1,5 @@
 import pygame
+import os
 
 # Inicializando o pygame
 pygame.init()
@@ -24,6 +25,12 @@ background_scroll = 0
 game_over = False
 score = 0
 fade_counter = 0
+
+if os.path.exists("score.txt"):
+    with open("score.txt", "r") as file:
+        high_score = int(file.read())
+else:
+    high_score = 0
 
 # Definindo as cores
 WHITE = (255, 255, 255)
