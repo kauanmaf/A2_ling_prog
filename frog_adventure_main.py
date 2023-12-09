@@ -30,7 +30,7 @@ class FrogJourneyGame(Minigame_abs):
         Grupo de contém os sprites dos objetos.
 
     - ``__fg_target_lane`` (int):
-        coordenada da lane para movimentação do player.
+        coordenada da lane para qualo player deseja se movimentar.
 
     - ``__fg_gameover`` (bool):
         Utilizada para ações quando o player perde.
@@ -43,7 +43,7 @@ class FrogJourneyGame(Minigame_abs):
 
     - ``__running`` (bool):
         Variável que será True caso o jogo esteje rodando.
-        
+
     Métodos:
     --------
     - ``run(self)``:
@@ -114,6 +114,7 @@ class FrogJourneyGame(Minigame_abs):
                 pygame.quit()
                 sys.exit()
 
+            #Determinaremos a target_lane do player
             if event.type == KEYDOWN:
                 if event.key == K_LEFT and self.__player.rect.center[0] > left_lane:
                     self.__fg_target_lane = left_lane
@@ -131,6 +132,8 @@ class FrogJourneyGame(Minigame_abs):
     def move_player(self):
         """Função que define as características de movimentação do player
         """
+
+        #Desloca o player para a target lane com base nas coordenadas x
         if self.__player.rect.center[0] < self.__fg_target_lane:
             self.__player.rect.x += self.__player._speed
             if self.__player.rect.center[0] > self.__fg_target_lane:
@@ -148,6 +151,7 @@ class FrogJourneyGame(Minigame_abs):
             for obstacle in self.__obstacle_group:
                 if obstacle.rect.top < obstacle.rect.height * 1.5:
                     add_obstacle = False
+                    #não permite que obstaculos sejam criados muito próximos
 
             if add_obstacle:
                 lane = random.choice(lanes)
@@ -163,7 +167,8 @@ class FrogJourneyGame(Minigame_abs):
             if obstacle.rect.top >= screen_height:
                 obstacle.kill()
                 self.__score.update_score()
-
+                #obstaculo é eliminado se sair da tela e é adicionado 1 no score
+    
     def check_collisions(self):
         """Função que detecta colisões e realiza ações a respeito
         """
@@ -171,6 +176,7 @@ class FrogJourneyGame(Minigame_abs):
             fg_collision_sound.play()
             self.__fg_gameover = True
             self.__player.set_dead()
+            #player é setado como morto se colidir com obstáculo
 
     def render(self):
         """Função que renderiza o jogo
