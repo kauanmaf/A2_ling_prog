@@ -51,3 +51,4 @@ fg_player_y = 640
 
 fg_target_lane = center_lane
 
+# frame settings
