@@ -44,7 +44,7 @@ class Bird(Player):
     bird.update(user_input)
     """
 
-    def __init__(self, bird_start_position):
+    def __init__(self, bird_start_position : tuple):
         """
         Inicializa a classe Bird.
 

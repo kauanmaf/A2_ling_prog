@@ -6,7 +6,7 @@ from classes_base_flappy import *
 
 class FlappyBird(Minigame_abs):
     """
-    Uma classe representando o jogo Flappy Bird.
+    Classe representando o jogo Flappy Bird.
 
     Atributos:
     -----------
@@ -40,8 +40,14 @@ class FlappyBird(Minigame_abs):
     - ``__menu`` (Menu):
         Uma instância da classe Menu para exibir o menu do jogo.
 
+    - ``__game_started`` (bool):
+        Indica se o jogo foi iniciado.
+
     Métodos:
     --------
+    - ``__init__(self, screen)``:
+        Inicializa as variáveis necessárias para a criação do jogo.
+
     - ``create_bird(self)``:
         Cria um novo pássaro e o adiciona ao grupo de sprites do pássaro.
 
@@ -76,9 +82,9 @@ class FlappyBird(Minigame_abs):
         self.__screen = screen
 
         self.__score = 0
-        self.__pipe_timer = 0
-        self.__scroll_speed = 3
-        self.__bird_position = (200, screen_height / 2 -100)
+        self.pipe_timer = 100
+        self.scroll_speed = 3
+        self.bird_position = (200, screen_height / 2 -100)
 
         self.__menu = Menu(self.__screen, self.__bird_position)
         self.__game_started = False
@@ -89,6 +95,67 @@ class FlappyBird(Minigame_abs):
         self.create_bird()
 
         self.__collision_detector = CollisionDetector(self.__bird, self.__ground, self.__pipes, self.__screen)
+
+    @property
+    def scroll_speed(self):
+        """
+        Obtém a velocidade de rolagem do jogo.
+
+        Returns:
+            int: A velocidade de rolagem do jogo.
+        """
+        return self.__scroll_speed
+    
+    @scroll_speed.setter
+    def scroll_speed(self, scroll_speed_: int):
+        """
+        Define a velocidade de rolagem do jogo.
+
+        Args:
+            scroll_speed_ (int): A nova velocidade de rolagem do jogo.
+        """
+        self.__scroll_speed = scroll_speed_
+
+    @property
+    def pipe_timer(self):
+        """
+        Obtém o temporizador de geração de canos.
+
+        Returns:
+            int: O temporizador de geração de canos.
+        """
+        return self.__pipe_timer
+    
+    @pipe_timer.setter
+    def pipe_timer(self, pipe_timer_: int):
+        """
+        Define o temporizador de geração de canos.
+
+        Args:
+            pipe_timer_ (int): O novo valor do temporizador de geração de canos.
+        """
+        self.__pipe_timer = pipe_timer_
+
+    @property
+    def bird_position(self):
+        """
+        Obtém a posição inicial do pássaro.
+
+        Returns:
+            tuple: As coordenadas da posição inicial do pássaro.
+        """
+        return self.__bird_position
+    
+    @bird_position.setter
+    def bird_position(self, bird_position_: tuple):
+        """
+        Define a posição inicial do pássaro.
+
+        Args:
+            bird_position_ (tuple): As novas coordenadas da posição inicial do pássaro.
+        """
+        self.__bird_position = bird_position_
+
 
     def create_bird(self):
         """
@@ -111,6 +178,8 @@ class FlappyBird(Minigame_abs):
         """
         Cria canos em posições específicas com base em um temporizador.
         """
+        if len(self.__pipes) <= 0:
+            self.pipe_timer = -1
         if self.__pipe_timer <= 0 and self.__bird.sprite._alive:
 
             y_top = random.randint(-600, -480)
@@ -119,9 +188,9 @@ class FlappyBird(Minigame_abs):
             self.__pipes.add(Pipe(x_top, y_top, top_pipe_image_flappy, "top", self.__scroll_speed))
             self.__pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image_flappy, "bottom", self.__scroll_speed))
 
-            self.__pipe_timer = 100
+            self.pipe_timer = 100
 
-        self.__pipe_timer -= 1
+        self.pipe_timer -= 1
 
     def update_score(self):
         """
