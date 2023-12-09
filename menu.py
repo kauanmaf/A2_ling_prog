@@ -1,4 +1,5 @@
 import pygame, sys
+from pygame import mixer
 from button import Button
 
 from utils import *
@@ -9,7 +10,12 @@ from playing import playing_flappybird, playing_jumpman
 pygame.init()
 
 SCREEN = pygame.display.set_mode((1280, 720))
-    
+
+# tocando música de fundo do menu inicial em looping
+pygame.mixer.music.load("assets/pixel-perfect.mp3")
+pygame.mixer.music.play(-1)    
+
+
 def options(screen):
     while True:
         # screen.blit(BACKGROUND, (0, 0))
@@ -51,12 +57,14 @@ def play(screen):
         screen.blit(text, rect)
 
         bird_img = pygame.image.load('assets/bird.png').convert_alpha()
-        jump_img = pygame.image.load('assets/jumpman-white.png').convert_alpha()
-        # bird_img = pygame.image.load('assets/bird.png').convert_alpha()
+        jump_img = pygame.image.load('assets/jumper-correct.png').convert_alpha()
+        frog_img = pygame.image.load('assets/froginho.png').convert_alpha()
 
-        first_button = Button(image=bird_img, pos=(340, 360),
+        first_button = Button(image=bird_img, pos=(290, 360),
                               text_input="", font=get_font(45), base_color="#fafafa", hovering_color="#fafafa")
-        second_button = Button(image=jump_img, pos=(700, 360),
+        second_button = Button(image=jump_img, pos=(600, 360),
+                              text_input="", font=get_font(45), base_color="#fafafa", hovering_color="#fafafa")
+        third_button = Button(image=frog_img, pos=(935, 360),
                               text_input="", font=get_font(45), base_color="#fafafa", hovering_color="#fafafa")
 
         back_button = Button(image=None, pos=(640, 650), 
@@ -66,6 +74,7 @@ def play(screen):
         
         first_button.update(screen)
         second_button.update(screen)
+        third_button.update(screen)
         back_button.update(SCREEN)
 
         for event in pygame.event.get():
@@ -74,10 +83,13 @@ def play(screen):
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if back_button.checkForInput(mouse_position):
+                    pygame.mixer.music.stop()
                     main_menu(SCREEN)
                 if first_button.checkForInput(mouse_position):
+                    pygame.mixer.music.stop()
                     playing_flappybird(screen)
                 if second_button.checkForInput(mouse_position):
+                    pygame.mixer.music.stop()
                     playing_jumpman(screen)
 
         pygame.display.update()    
