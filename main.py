@@ -48,6 +48,12 @@ while run:
         if jumpy.rect.top > SCREEN_HEIGHT:
             game_over = True
     else:
+        if fade_counter < SCREEN_WIDTH:
+            fade_counter += 5
+            # Construindo o fundo da imagem de game over
+            for rect_y in range(0, 6, 2):
+                pygame.draw.rect(screen, BLACK, (0, rect_y * 100, fade_counter, 100))
+                pygame.draw.rect(screen, BLACK, (SCREEN_WIDTH - fade_counter, (rect_y + 1) * 100, SCREEN_WIDTH, 100))
         draw_text("GAME OVER", font_big, WHITE, 130, 200) 
         draw_text("SCORE: " + str(score), font_big, WHITE, 130, 250) 
         draw_text("PRESS SPACE TO PLAY AGAIN", font_big, WHITE, 40, 300)   
@@ -57,6 +63,7 @@ while run:
             game_over = False
             score = 0
             scroll = 0
+            fade_counter = 0
             # Reposicionando o jogador
             jumpy.rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
             # Redefinindo as plataformas

@@ -23,9 +23,11 @@ scroll = 0
 background_scroll = 0
 game_over = False
 score = 0
+fade_counter = 0
 
 # Definindo as cores
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 # Definindo as fontes
 font_small = pygame.font.SysFont("Lucida Sans", 20)
