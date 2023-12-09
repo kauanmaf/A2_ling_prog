@@ -50,12 +50,12 @@ while run:
         platform_group.update(scroll)
         
         # Gerando inimigos
-        if len(enemy_group) == 0:
+        if len(enemy_group) == 0 and score > 1500:
             enemy = Enemy(SCREEN_WIDTH, 100, enemy_sheet, 1.5)
             enemy_group.add(enemy)
             
         # Atualizando os inimigos
-        enemy_group.update()
+        enemy_group.update(scroll)
         
         # Atualizando a pontuação
         if scroll > 0:
@@ -103,6 +103,8 @@ while run:
                 fade_counter = 0
                 # Reposicionando o jogador
                 jumpy.rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
+                # Redefinindo os inimigos
+                enemy_group.empty()
                 # Redefinindo as plataformas
                 platform_group.empty()
                 # Criando a plataforma inicial
