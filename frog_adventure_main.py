@@ -83,7 +83,7 @@ class FrogJourneyGame(Minigame_abs):
         self.__player_group.add(self.__player)
         self.__obstacle_group = pygame.sprite.Group()
 
-        self.__obstacles = Obstacle(image, lane, screen_height / -2, self.__obstacle_group)
+        self.__obstacles = Obstacle(image, lane, screen_height / -2)
 
         #criando o restante dos atributos necessários para o jogo
         self.__fg_gameover = False
@@ -121,8 +121,8 @@ class FrogJourneyGame(Minigame_abs):
     def update(self):
         """Função que atualiza os aspectos do jogo a cada quadro.
         """
+        Obstacle.draw_obstacles(self.__obstacle_group)
         self.__player.move_player()
-        self.__obstacles.draw_obstacles()
         self.move_obstacles()
         self.check_collisions()
 
@@ -151,13 +151,12 @@ class FrogJourneyGame(Minigame_abs):
         screen.fill((0, 0, 0))
 
         self.__background.draw_background(screen)
+        Score.draw_score(screen, self.__score.get_score())
 
         if self.__player._visible:
             self.__player_group.draw(screen)
 
         self.__obstacle_group.draw(screen)
-
-        self.__score.draw_score(screen)
 
         if self.__fg_gameover:
             screen.blit(death_box, (0, 0))

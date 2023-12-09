@@ -114,21 +114,21 @@ class Obstacle(pygame.sprite.Sprite):
     - ``draw_obstacles(self)``:
         Função que desenha os obstáculos no jogo
     """
-    def __init__(self, image: pygame.Surface, x: int, y: int, obstacle_group: pygame.sprite.Group):
+    def __init__(self, image: pygame.Surface, x: int, y: int):
         """Essa função inicializa os obstáculos do jogo
         """
         super().__init__()
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
-        self.__obstacle_group = obstacle_group
 
-    def draw_obstacles(self):
+    @staticmethod
+    def draw_obstacles(obstacle_group: pygame.sprite.Group):
         """Função que desenha os obstáculos do jogo
         """
-        if len(self.__obstacle_group) < 2:
+        if len(obstacle_group) < 2:
             add_obstacle = True
-            for obstacle in self.__obstacle_group:
+            for obstacle in obstacle_group:
                 if obstacle.rect.top < obstacle.rect.height * 1.5:
                     add_obstacle = False
                     #não permite que obstaculos sejam criados muito próximos
@@ -136,8 +136,8 @@ class Obstacle(pygame.sprite.Sprite):
             if add_obstacle:
                 lane = random.choice(lanes)
                 image = random.choice(obstacle_images)
-                obstacle = Obstacle(image, lane, screen_height / -2, self.__obstacle_group)
-                self.__obstacle_group.add(obstacle) 
+                obstacle = Obstacle(image, lane, screen_height / -2)
+                obstacle_group.add(obstacle) 
                 # cria um objeto com sprite aleatório em uma lane aleatória
 
 class CollisionDetection:
@@ -260,6 +260,16 @@ class Score:
     ----
     score = Score()
     score.draw_score()
+
+    Método 3:
+    ---------
+    - ``get_score(self)``:
+        Retorna o score atual
+
+    Uso:
+    ----
+    score = Score
+    score.get_score()
     """
     def __init__(self):
         """Essa função inicializa as duas imagens do background e a pontuação do jogador
@@ -275,7 +285,13 @@ class Score:
         if self._fg_score > 0 and self._fg_score % 5 == 0:
             self._fg_speed += 1
 
-    def draw_score(self, screen: pygame.Surface):
+    def get_score(self):
+        """Retorna o score atual
+        """
+        return self._fg_score
+
+    @staticmethod
+    def draw_score(screen: pygame.Surface, fg_score: int):
         """Essa função deseja o score na tela
 
         Parâmetros:
@@ -283,9 +299,11 @@ class Score:
         - ``screen`` (pygame.Surface):
             Superfície da tela do jogo.
 
+        - ``__fg_score`` (int):
+            score do player.
         """
-        self.__font = pygame.font.Font(pygame.font.get_default_font(), 30)
-        self.__text = self.__font.render('Score: ' + str(self._fg_score), True, white)
-        self.__text_rect = self.__text.get_rect()
-        self.__text_rect.center = (640, 40)
-        screen.blit(self.__text, self.__text_rect)
+        __font = pygame.font.Font(pygame.font.get_default_font(), 30)
+        __text = __font.render('Score: ' + str(fg_score), True, white)
+        __text_rect = __text.get_rect()
+        __text_rect.center = (640, 40)
+        screen.blit(__text, __text_rect)
