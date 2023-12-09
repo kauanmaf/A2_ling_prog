@@ -11,9 +11,10 @@ class FrogJourneyGame(Minigame_abs):
         """Essa função inicializa as classes importadas e cria variáveis necessárias 
         para o funcionamento do jogo
         """
-        self.__player = Player1(frog_img, fg_player_x, fg_player_y, speed = 6)
+        self.__player = Player1()
         self.__collision_detection = CollisionDetection()
-        self.__background_and_score = BackgroundAndScore()
+        self.__background = Background()
+        self.__score = Score()
 
         self.__player_group = pygame.sprite.Group()
         self.__obstacle_group = pygame.sprite.Group()
@@ -27,6 +28,7 @@ class FrogJourneyGame(Minigame_abs):
         self.__clock = pygame.time.Clock()
         self.__running = True
         self.__fps = 100
+        
     def run(self):
         """Essa função abriga o loop que roda o jogo
         """
@@ -92,10 +94,10 @@ class FrogJourneyGame(Minigame_abs):
         """Função que garante a movimentação dos obstáculos
         """
         for obstacle in self.__obstacle_group:
-            obstacle.rect.y += self.__background_and_score._fg_speed
+            obstacle.rect.y += self.__score._fg_speed
             if obstacle.rect.top >= screen_height:
                 obstacle.kill()
-                self.__background_and_score.update_score()
+                self.__score.update_score()
 
     def check_collisions(self):
         """Função que detecta colisões e realiza ações a respeito
@@ -110,14 +112,14 @@ class FrogJourneyGame(Minigame_abs):
         """
         screen.fill((0, 0, 0))
 
-        self.__background_and_score.draw_background(screen)
+        self.__background.draw_background(screen)
 
         if self.__player._visible:
             self.__player_group.draw(screen)
 
         self.__obstacle_group.draw(screen)
 
-        self.__background_and_score.draw_score(screen)
+        self.__score.draw_score(screen)
 
         if self.__fg_gameover:
             screen.blit(death_box, (0, 0))
@@ -143,8 +145,8 @@ class FrogJourneyGame(Minigame_abs):
         """Função que define aspectos do jogo ao ser resetado
         """
         self.__fg_gameover = False
-        self.__background_and_score._fg_speed = 2
-        self.__background_and_score._fg_score = 0
+        self.__score._fg_speed = 2
+        self.__score._fg_score = 0
         self.__obstacle_group.empty()
         self.__player.rect.center = [fg_player_x, fg_player_y]
         self.__player._visible = True
