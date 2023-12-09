@@ -54,13 +54,15 @@ class Bird(Player):
             Posição inicial do pássaro.
         """
         super().__init__()
-        self.image = bird_images[0]
+        # Inicialização dos atributos públicos
+        self.image = bird_images_flappy[0]
         self.rect = self.image.get_rect()
         self.rect.center = bird_start_position
         self.__image_index = 0
         self.__vel = 0
         self.__flap = False
         self._alive = True
+    
 
     def update(self, user_input, y_pos_ground=530):
         """
@@ -74,11 +76,14 @@ class Bird(Player):
     - ``y_pos_ground`` (int):
         Posição vertical do chão no jogo (padrão: 530)..
         """
+        # Animação do pássaro
         if self._alive:
             self.__image_index += 1
         if self.__image_index >= 30:
             self.__image_index = 0
-        self.image = bird_images[self.__image_index // 10]
+        self.image = bird_images_flappy[self.__image_index // 10]
+
+        # Atualização da velocidade vertical
         self.__vel += 0.5
         if self.__vel > 7:
             self.__vel = 7
@@ -91,6 +96,7 @@ class Bird(Player):
         if user_input[pygame.K_SPACE] and not self.__flap and self.rect.y > 0 and self._alive:
             self.__flap = True
             self.__vel = -7
+            flap_sound_flappy.play()
 
         # Alteração da orientação do pássaro
         self.image = pygame.transform.rotate(self.image, self.__vel * -7)
@@ -150,7 +156,7 @@ class Ground(pygame.sprite.Sprite):
         super().__init__()
 
         # Inicialização dos atributos públicos
-        self.image = ground_image
+        self.image = ground_image_flappy
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
@@ -316,6 +322,9 @@ class CollisionDetector:
 
         Parâmetros:
         -----------
+        - ``screen`` (pygame.Surface):
+            Superfície da tela do jogo.
+
         - ``bird`` (pygame.sprite.GroupSingle):
             Grupo de sprites contendo o pássaro.
 
@@ -325,13 +334,14 @@ class CollisionDetector:
         - ``pipes`` (pygame.sprite.Group):
             Grupo de sprites contendo os canos.
 
-        - ``screen`` (pygame.Surface):
-            Superfície da tela do jogo.
+        - ``hit`` (bool):
+            Verifica se o pássaro já colidiu com o chão alguma vez
         """
         self.screen = screen
         self.__bird = bird
         self.__ground = ground
         self.__pipes = pipes
+        self.__hit = False
         
 
     def check_collisions(self):
@@ -342,12 +352,21 @@ class CollisionDetector:
         collision_pipes = pygame.sprite.spritecollide(self.__bird.sprite, self.__pipes, False)
 
         if collision_pipes or collision_ground:
+            # Fazendo o som na primeira vez que ocorre a colisão 
+            if self.__bird.sprite._alive:
+                hit_sound_flappy.play()
+
             self.__bird.sprite._alive = False
             if collision_ground:
+                # Fazendo o som da primeira vez que encosta no chão
+                if not self.__hit:
+                    die_sound_flappy.play()
+                    self.__hit = True
                 # Desenha a imagem de game over
-                self.screen.blit(game_over_image,
-                            (screen_width // 2 - game_over_image.get_width() // 2,
-                             screen_height // 2 - game_over_image.get_height() // 2))
+                self.screen.blit(game_over_image_flappy,
+                            (screen_width // 2 - game_over_image_flappy.get_width() // 2,
+                             screen_height // 2 - game_over_image_flappy.get_height() // 2))
+                
 
 
 class Menu:
@@ -397,17 +416,16 @@ class Menu:
             Posição inicial do pássaro.
         """
         self.screen = screen
-        self.clock = pygame.time.Clock()
         self.__bird_start_position = bird_start_position
 
     def draw(self):
         """
         Desenha o menu inicial na tela.
         """
-        self.screen.blit(skyline_image, (0, 0))
-        self.screen.blit(ground_image, Ground(0, 520, 3).rect)
-        self.screen.blit(ground_image, Ground(ground_image.get_width(), 520, 3).rect)
+        self.screen.blit(skyline_image_flappy, (0, 0))
+        self.screen.blit(ground_image_flappy, Ground(0, 520, 3).rect)
+        self.screen.blit(ground_image_flappy, Ground(ground_image_flappy.get_width(), 520, 3).rect)
 
-        self.screen.blit(bird_images[0], self.__bird_start_position)
-        self.screen.blit(start_image, (screen_width // 2 - start_image.get_width() // 2,
-                                       screen_height // 2 - start_image.get_height() // 2))
+        self.screen.blit(bird_images_flappy[0], self.__bird_start_position)
+        self.screen.blit(start_image_flappy, (screen_width // 2 - start_image_flappy.get_width() // 2,
+                                       screen_height // 2 - start_image_flappy.get_height() // 2))

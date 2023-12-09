@@ -103,8 +103,8 @@ class FlappyBird(Minigame_abs):
         """
         ground_group = pygame.sprite.Group()  # Create a group to hold grounds
         ground_group.add(Ground(x_pos_ground, y_pos_ground, self.__scroll_speed))
-        ground_group.add(Ground(x_pos_ground + ground_image.get_width(), y_pos_ground, self.__scroll_speed))
-        ground_group.add(Ground(x_pos_ground + 2 * ground_image.get_width(), y_pos_ground, self.__scroll_speed))
+        ground_group.add(Ground(x_pos_ground + ground_image_flappy.get_width(), y_pos_ground, self.__scroll_speed))
+        ground_group.add(Ground(x_pos_ground + 2 * ground_image_flappy.get_width(), y_pos_ground, self.__scroll_speed))
         return ground_group  
 
     def spawn_pipes(self, x_top = 1300, x_bottom = 1300):
@@ -114,10 +114,10 @@ class FlappyBird(Minigame_abs):
         if self.__pipe_timer <= 0 and self.__bird.sprite._alive:
 
             y_top = random.randint(-600, -480)
-            y_bottom = y_top + random.randint(90, 130) + bottom_pipe_image.get_height()
+            y_bottom = y_top + random.randint(90, 130) + bottom_pipe_image_flappy.get_height()
 
-            self.__pipes.add(Pipe(x_top, y_top, top_pipe_image, "top", self.__scroll_speed))
-            self.__pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image, "bottom", self.__scroll_speed))
+            self.__pipes.add(Pipe(x_top, y_top, top_pipe_image_flappy, "top", self.__scroll_speed))
+            self.__pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image_flappy, "bottom", self.__scroll_speed))
 
             self.__pipe_timer = 100
 
@@ -134,6 +134,7 @@ class FlappyBird(Minigame_abs):
                 exit_position = pipe_rect.x + pipe_rect.width
 
                 if bird_rect.x > exit_position:
+                    score_sound_flappy.play()
                     pipe._passed = True
                     self.__score += 1
 
@@ -160,7 +161,7 @@ class FlappyBird(Minigame_abs):
         """
 
         # Desenhando a imgaem de fundo
-        self.__screen.blit(skyline_image, (0, 0))
+        self.__screen.blit(skyline_image_flappy, (0, 0))
 
         # Desenhando os canos
         self.__pipes.draw(self.__screen)
@@ -209,6 +210,7 @@ class FlappyBird(Minigame_abs):
         if not self.__game_started:
             self.__menu.draw()
             if keys[pygame.K_SPACE]:
+                transition_sound_flappy.play()
                 self.__game_started = True
         
         # Se o passaro não estiver vivo e a tecla R é pressionada, o jogo é restaurado
