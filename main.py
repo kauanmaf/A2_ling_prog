@@ -4,8 +4,10 @@ import os
 from settings import *
 from endless_vertical_platformer import *
 from utils import *
+from pygame import mixer
 
 # Inicializando o pygame
+mixer.init()
 pygame.init()
 
 # Criando a instância do jogador
@@ -78,10 +80,12 @@ while run:
         # Verificando o fim do jogo
         if jumpy.rect.top > SCREEN_HEIGHT:
             game_over = True
+            death_sound.play()
         # Verificandovse há colisão com inimigos
         if pygame.sprite.spritecollide(jumpy, enemy_group, False):
             if pygame.sprite.spritecollide(jumpy, enemy_group, False, pygame.sprite.collide_mask):
                 game_over = True
+                death_sound.play()
     else:
         if fade_counter < SCREEN_WIDTH:
             fade_counter += 5

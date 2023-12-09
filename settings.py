@@ -16,6 +16,13 @@ pygame.display.set_caption("Endless Vertical")
 clock = pygame.time.Clock()
 FPS = 60
 
+# Carregando músicas e sons
+pygame.mixer.music.load("endless_vertical_platformer_assets/music.mp3")
+pygame.mixer.music.set_volume(0.6)
+pygame.mixer.music.play(- 1, 0.0)
+death_sound = pygame.mixer.Sound("endless_vertical_platformer_assets/death.mp3")
+death_sound.set_volume(0.5)
+
 # Construindo as variáveis do jogo
 SCROLL_THRESH = 200
 GRAVITY = 1
