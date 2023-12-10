@@ -47,7 +47,9 @@ class Button():
 		self.__font = font
 		self.__base_color, self.__hovering_color = base_color, hovering_color
 		self.__text_input = text_input
+		# criando texto
 		self.__text = self.__font.render(self.__text_input, True, self.__base_color)
+		# definindo texto como botão se não tiver imagem
 		if self.__image is None:
 			self.__image = self.__text
 		self.__rect = self.__image.get_rect(center=(self.__x_pos, self.__y_pos))
@@ -59,6 +61,7 @@ class Button():
 		screen.blit(self.__text, self.__text_rect)
 
 	def checkForInput(self, position):
+		# verificando se o mouse está dentro dos limites do retangulo
 		if position[0] in range(self.__rect.left, self.__rect.right) and position[1] in range(self.__rect.top, self.__rect.bottom):
 			return True
 		return False

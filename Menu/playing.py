@@ -50,6 +50,11 @@ def playing_flappybird(screen):
         pygame.display.update()
         
 def playing_doodleman(screen):
+    """
+    Função que define as configurações necessárias e inicia o doodleman
+
+    :param surface screen: tela onde o jogo vai ser iniciado
+    """
     pygame.display.set_caption("Flappy Bird")
     
     clock = pygame.time.Clock()
