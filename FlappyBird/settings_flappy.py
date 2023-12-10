@@ -1,3 +1,7 @@
+"""
+Módulo criado para a elaboração das configurações do jogo Flappy Bird.
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 

@@ -1,5 +1,5 @@
 """
-Módulo criado para a elaboração das configurações do jogo Doodle Jump
+Módulo criado para a elaboração das configurações do jogo Doodle Jump.
 """
 
 import os

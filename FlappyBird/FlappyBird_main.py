@@ -1,3 +1,8 @@
+"""
+Módulo criado para a execução do jogo Flappy Bird.
+Esse módulo contém as pricipais classes de execução do jogo Flappy Bird. 
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 

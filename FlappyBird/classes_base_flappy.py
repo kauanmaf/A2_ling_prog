@@ -1,3 +1,8 @@
+"""
+Módulo criado para o esboço do jogo Flappy Bird.
+Esse módulo contém as classes básicas do jogo Flappy Bird: Bird, Groud, Pipe, CollisionDetector e Menu.
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 

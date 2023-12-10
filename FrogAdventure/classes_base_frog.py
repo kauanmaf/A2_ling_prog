@@ -1,3 +1,8 @@
+"""
+Módulo criado para o esboço do jogo Aventura do Sapo.
+Esse módulo contém as classes básicas do jogo Aventura do Sapo: Player1, Obstacle, CollisionDetection, Background e Score.
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 
