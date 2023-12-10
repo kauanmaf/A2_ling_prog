@@ -96,10 +96,13 @@ class DoodleJump(Minigame_abs):
         self.__screen = screen
         self.__game_over = False
 
+        # Elaborando grupos de sprites
         self.__platform_group = pygame.sprite.Group()
         self.__enemy_group = pygame.sprite.Group()
 
+        # Construindo a spritesheet do inimigo
         self.__enemy_sheet = SpriteSheet(enemy_sheet_image)
+        # Criando a instância do jogador
         self.__jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150, self.__platform_group)  
         
         self.__scroll = self.__jumpy.move()
@@ -132,6 +135,7 @@ class DoodleJump(Minigame_abs):
         """
         Cria plataformas com base em condições específicas e as adiciona ao grupo de plataformas.
         """
+        # Inserindo plataformas
         if not self.__platform_group:  
             platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
             self.__platform_group.add(platform)
@@ -145,6 +149,7 @@ class DoodleJump(Minigame_abs):
             platform_y = last_platform.rect.y - random.randint(80, 120)
             platform_type = random.randint(1, 2)
 
+            # Verificando as condições de movimentação das plataformas
             if platform_type == 1 and self._score > 750:
                 platform_movement = True
             else:
@@ -229,6 +234,7 @@ class DoodleJump(Minigame_abs):
         """
         Atualiza o estado do jogo com base na entrada do usuário e colisões.
         """
+        # Atualizando as plataformas e o inimigo
         self.__platform_group.update(self.__scroll)
         self.__enemy_group.update(self.__scroll)
 
@@ -245,6 +251,7 @@ class DoodleJump(Minigame_abs):
         """
         Desenha a tela de fim de jogo na tela.
         """
+        # Inserindo textos à tela final
         self.draw_text("GAME OVER", font_big, WHITE, 130, 200) 
         self.draw_text("SCORE: " + str(self._score), font_big, WHITE, 130, 250) 
         self.draw_text("PRESS SPACE TO PLAY AGAIN", font_big, WHITE, 40, 300)  
@@ -264,6 +271,7 @@ class DoodleJump(Minigame_abs):
         """
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
+            # Redefinindo as variáveis
             self.__screen = screen
             self.__game_over = False
             self.__enemy_sheet = SpriteSheet(enemy_sheet_image)
@@ -297,6 +305,7 @@ class DoodleJump(Minigame_abs):
             self.check_game_over()
         else:
             if self._fade_counter < SCREEN_WIDTH:
+                # Construindo o fundo da imagem de game over
                 self.create_background()
                 self._fade_counter += 5
                 self.draw_fade_counter()
@@ -308,9 +317,12 @@ class DoodleJump(Minigame_abs):
     
     
 if __name__ == "__main__":
+    # Inicializando o pygame
     pygame.mixer.init()
     pygame.init()
+    # Criando a janela do jogo
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    # Criando uma instância do jogo
     game = DoodleJump(screen)
 
 
@@ -321,10 +333,10 @@ if __name__ == "__main__":
         # Configurando o fundo da tela
         screen.fill((0, 0, 0))
 
-        # Criando uma instância do jogo
+        # Executando o jogo
         game.run()
 
-        # Loop for para casa a pessoa queira sair do jogo
+        # Loop for caso a pessoa queira sair do jogo
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
