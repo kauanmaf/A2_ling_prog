@@ -1,6 +1,6 @@
 from abstract import Minigame_abs
-from settings import *
-from doodle_jump import *
+from settings_doodle import *
+from classes_base_doodle import *
 import sys
 import random
 
@@ -87,7 +87,7 @@ class DoodleJump(Minigame_abs):
     - ``run(self)``:
         Executa o loop do jogo, lidando com a criação de elementos do jogo, desenho, atualização e estado de fim de jogo.
     """
-    def __init__(self, screen):
+    def __init__(self, screen: pygame.Surface):
         """
         Inicializa as variáveis necessárias para a criação do jogo.
         """
@@ -307,33 +307,33 @@ class DoodleJump(Minigame_abs):
 
     
     
+if __name__ == "__main__":
+    pygame.mixer.init()
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    game = DoodleJump(screen)
 
-pygame.mixer.init()
-pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-game = DoodleJump(screen)
 
+    while True:
+        # Configurando a taxa de atualização do jogo
+        clock.tick(60)
 
-while True:
-    # Configurando a taxa de atualização do jogo
-    clock.tick(60)
+        # Configurando o fundo da tela
+        screen.fill((0, 0, 0))
 
-    # Configurando o fundo da tela
-    screen.fill((0, 0, 0))
+        # Criando uma instância do jogo
+        game.run()
 
-    # Criando uma instância do jogo
-    game.run()
-
-    # Loop for para casa a pessoa queira sair do jogo
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+        # Loop for para casa a pessoa queira sair do jogo
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
 
-    # Fazendo um update pra manter no caso de atualizações
-    pygame.display.update()
-    
+        # Fazendo um update pra manter no caso de atualizações
+        pygame.display.update()
+        

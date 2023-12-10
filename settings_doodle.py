@@ -27,17 +27,6 @@ death_sound.set_volume(0.5)
 SCROLL_THRESH = 200
 GRAVITY = 1
 MAX_PLATFORMS = 10
-# scroll = 0
-# background_scroll = 0
-# game_over = False
-# score = 0
-# fade_counter = 0
-
-# if os.path.exists("score.txt"):
-#     with open("score.txt", "r") as file:
-#         high_score = int(file.read())
-# else:
-#     high_score = 0
 
 # Definindo as cores
 WHITE = (255, 255, 255)
@@ -55,7 +44,3 @@ platform_image = pygame.image.load("endless_vertical_platformer_assets/platform.
 
 # Carregando a imagem do inimigo
 enemy_sheet_image = pygame.image.load("endless_vertical_platformer_assets/enemy.png")
-
-# # Elaborando grupos de sprites
-# platform_group = pygame.sprite.Group()
-# enemy_group = pygame.sprite.Group()

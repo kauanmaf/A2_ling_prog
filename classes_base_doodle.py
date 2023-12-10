@@ -1,8 +1,7 @@
 import pygame
 import random
-from settings import *
+from settings_doodle import *
 from abstract import *
-from utils import draw_background
 
 class Jumper(Player):
     """
