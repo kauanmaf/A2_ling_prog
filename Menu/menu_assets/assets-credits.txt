@@ -1,0 +1,23 @@
+bird: 
+imagem obtida através do link: 
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F9d%2F63%2F67%2F9d63676d959ceb7fc33cb1b73cc2780f.jpg&tbnid=rcXMtwMt4KiD9M&vet=12ahUKEwjLx8KT0ISDAxVWlJUCHdFdAhAQMygLegQIARBp..i&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F649362840018621072%2F&docid=ejFb-ml1i__CQM&w=736&h=736&q=flappy%20bird&ved=2ahUKEwjLx8KT0ISDAxVWlJUCHdFdAhAQMygLegQIARBp
+redimensionada no paint e tendo fundo removido no site: https://www.remove.bg/pt-br
+
+font: 
+obitda nesse repositório: https://github.com/baraltech/Menu-System-PyGame
+
+froginho: mesma imagem da pasta FrogAdvenute/assests_frog, redimensionada 
+no paint e com fundo removido
+
+jumper-correct: 
+mesma imagem da pasta DoodleJump/DoodleJump_assets, redimensionada no paint e com fundo removido
+
+menu-background: 
+imagem obtida através do link: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpapersmug.com%2Fw%2Fdownload%2F1280x720%2Fsky-clouds-original-anime-a801aa&psig=AOvVaw03pCLFqpoYBw4r41_6W0hg&ust=1702289796541000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMjd4ObRhIMDFQAAAAAdAAAAABAD
+
+options-rect, play-rect e quit-rect: 
+deste repositório: https://github.com/baraltech/Menu-System-PyGame
+
+pixel-perfect:
+obtida gratuitamente no pixabay, link:
+https://pixabay.com/music/video-games-pixel-perfect-112527/ (por Lesiakower)

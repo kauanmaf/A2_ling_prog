@@ -41,30 +41,30 @@ class Button():
 	"""
 
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
-		self.image = image
-		self.x_pos = pos[0]
-		self.y_pos = pos[1]
-		self.font = font
-		self.base_color, self.hovering_color = base_color, hovering_color
-		self.text_input = text_input
-		self.text = self.font.render(self.text_input, True, self.base_color)
-		if self.image is None:
-			self.image = self.text
-		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
-		self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
+		self.__image = image
+		self.__x_pos = pos[0]
+		self.__y_pos = pos[1]
+		self.__font = font
+		self.__base_color, self.__hovering_color = base_color, hovering_color
+		self.__text_input = text_input
+		self.__text = self.__font.render(self.__text_input, True, self.__base_color)
+		if self.__image is None:
+			self.__image = self.__text
+		self.__rect = self.__image.get_rect(center=(self.__x_pos, self.__y_pos))
+		self.__text_rect = self.__text.get_rect(center=(self.__x_pos, self.__y_pos))
 
 	def update(self, screen):
-		if self.image is not None:
-			screen.blit(self.image, self.rect)
-		screen.blit(self.text, self.text_rect)
+		if self.__image is not None:
+			screen.blit(self.__image, self.__rect)
+		screen.blit(self.__text, self.__text_rect)
 
 	def checkForInput(self, position):
-		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
+		if position[0] in range(self.__rect.left, self.__rect.right) and position[1] in range(self.__rect.top, self.__rect.bottom):
 			return True
 		return False
 
 	def changeColor(self, position):
-		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
-			self.text = self.font.render(self.text_input, True, self.hovering_color)
+		if position[0] in range(self.__rect.left, self.__rect.right) and position[1] in range(self.__rect.top, self.__rect.bottom):
+			self.__text = self.__font.render(self.__text_input, True, self.__hovering_color)
 		else:
-			self.text = self.font.render(self.text_input, True, self.base_color)
+			self.__text = self.__font.render(self.__text_input, True, self.__base_color)
