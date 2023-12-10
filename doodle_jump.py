@@ -40,7 +40,7 @@ class Jumper(Player):
             Plota o saltador
         
     """
-    def __init__(self, x, y ):
+    def __init__(self, x, y, platform_group):
         """
         Inicializa a classe Jumper
             
@@ -59,6 +59,8 @@ class Jumper(Player):
         self.rect.center = (x, y)
         self.vel_y = 0
         self.flip = False
+        self.platform_group = platform_group
+
         
     def move(self):
         """
@@ -94,7 +96,7 @@ class Jumper(Player):
             dx = SCREEN_WIDTH - self.rect.right
             
         # Averigando a colisão com as plataformas
-        for platform in platform_group:
+        for platform in self.platform_group:
             # Colisão na direção y
             if platform.rect.colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
                 # Verificando se está acima da plataforma

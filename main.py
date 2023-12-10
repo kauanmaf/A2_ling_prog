@@ -11,7 +11,7 @@ mixer.init()
 pygame.init()
 
 # Criando a instância do jogador
-jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150)
+jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150, platform_group)
 
 # Criando a plataforma inicial
 platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
