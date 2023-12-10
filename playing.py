@@ -21,7 +21,9 @@ def playing_flappybird(screen):
     clock = pygame.time.Clock()
     game = FlappyBird(screen)
 
-    while True:
+    game_running = True
+
+    while game_running:
         # Configurando a taxa de atualização do jogo
         clock.tick(100)
 
@@ -36,10 +38,8 @@ def playing_flappybird(screen):
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                        game_running = False
 
         # Fazendo um update pra manter no caso de atualizações
         pygame.display.update()
@@ -50,7 +50,9 @@ def playing_doodleman(screen):
     clock = pygame.time.Clock()
     game = DoodleJump(screen)
 
-    while True:
+    game_running = True
+
+    while game_running:
         # Configurando a taxa de atualização do jogo
         clock.tick(100)
 
@@ -65,14 +67,11 @@ def playing_doodleman(screen):
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    game_running = False
 
         # Fazendo um update pra manter no caso de atualizações
         pygame.display.update()
-    pass
 
 def playing_frog():
     game = FrogJourneyGame()

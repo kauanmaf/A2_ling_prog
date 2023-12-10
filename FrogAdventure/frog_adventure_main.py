@@ -100,11 +100,12 @@ class FrogJourneyGame(Minigame_abs):
         """
         while self.__running:
             self.__clock.tick(100)
-            self.handle_events()
             self.update()
             self.render()
+            self.handle_events()
+            
 
-        pygame.quit()
+        # pygame.quit()
 
     def handle_events(self):
         """Essa função controla os eventos de fechamento do jogo e aperto de teclas
@@ -119,8 +120,8 @@ class FrogJourneyGame(Minigame_abs):
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.mixer.music.stop()
-                    pygame.quit()
-                    sys.exit()
+                    self.__running = False
+                    game_running = False
                 if event.key == K_LEFT and self.__player.rect.center[0] > left_lane:
                     self.__player._target_lane = left_lane
                 elif event.key == K_RIGHT and self.__player.rect.center[0] < right_lane:

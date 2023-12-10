@@ -11,6 +11,40 @@ pygame.init()
 pygame.mixer.music.load("menu_assets/pixel-perfect.mp3")
 pygame.mixer.music.play(-1)
 
+def main_menu(screen):
+    while True:
+        screen.blit(BACKGROUND, (0, 0))
+        # screen.fill((0, 0, 0))
+        pygame.display.set_caption("Main menu")
+
+        mouse_position = pygame.mouse.get_pos()
+
+        text = get_font(100).render("MINI GAMES", True, "#d4a6a4")
+        rect = text.get_rect(center=(640, 100))
+
+        play_buttton = Button(image=pygame.image.load("menu_assets/play-rect.png"), pos=(640, 275), 
+                            text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+        quit_button = Button(image=pygame.image.load("menu_assets/quit-rect.png"), pos=(640, 475), 
+                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+
+        screen.blit(text, rect)
+
+        for button in [play_buttton, quit_button]:
+            button.changeColor(mouse_position)
+            button.update(screen)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if play_buttton.checkForInput(mouse_position):
+                    play(screen)
+                if quit_button.checkForInput(mouse_position):
+                    pygame.quit()
+                    sys.exit()
+
+        pygame.display.update()
 
 def play(screen):
     """Função que cria o menu no qual o jogador pode escolher entre os três jogos
@@ -66,39 +100,9 @@ def play(screen):
                     pygame.mixer.music.stop()
                     playing_frog()
 
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                main_menu(screen)
+
+
         pygame.display.update()    
 
-def main_menu(screen):
-    while True:
-        screen.blit(BACKGROUND, (0, 0))
-        # screen.fill((0, 0, 0))
-        pygame.display.set_caption("Main menu")
-
-        mouse_position = pygame.mouse.get_pos()
-
-        text = get_font(100).render("MINI GAMES", True, "#d4a6a4")
-        rect = text.get_rect(center=(640, 100))
-
-        play_buttton = Button(image=pygame.image.load("menu_assets/play-rect.png"), pos=(640, 275), 
-                            text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        quit_button = Button(image=pygame.image.load("menu_assets/quit-rect.png"), pos=(640, 475), 
-                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-
-        screen.blit(text, rect)
-
-        for button in [play_buttton, quit_button]:
-            button.changeColor(mouse_position)
-            button.update(screen)
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if play_buttton.checkForInput(mouse_position):
-                    play(screen)
-                if quit_button.checkForInput(mouse_position):
-                    pygame.quit()
-                    sys.exit()
-
-        pygame.display.update()
