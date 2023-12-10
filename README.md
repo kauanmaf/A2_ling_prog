@@ -19,6 +19,8 @@ Os assets estão incluídos no repositório, e os devidos créditos se encontram
 
 ## Mini-Jogos
 
+** Utilize a tecla ESC para voltar para o menu principal quando você estiver dentro de algum jogo"
+
 ### DoodleJump
 
 Utilize as setas para mover seu personagem. Tome cuidado com os inimigos e com as plataformas que se movem. O céu é o limite!
