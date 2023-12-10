@@ -1,14 +1,20 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
+
 import pygame, sys
-from button import Button
+from Menu.button import Button
 
-from utils import *
+from Menu.utils import *
 
-from playing import playing_flappybird, playing_doodleman, playing_frog
+from Menu.playing import playing_flappybird, playing_doodleman, playing_frog
 
 pygame.init()
 
 # tocando música de fundo do menu inicial em looping
-pygame.mixer.music.load("menu_assets/pixel-perfect.mp3")
+pygame.mixer.music.load("Menu/menu_assets/pixel-perfect.mp3")
 pygame.mixer.music.play(-1)
 
 def main_menu(screen):
@@ -22,9 +28,9 @@ def main_menu(screen):
         text = get_font(100).render("MINI GAMES", True, "#d4a6a4")
         rect = text.get_rect(center=(640, 100))
 
-        play_buttton = Button(image=pygame.image.load("menu_assets/play-rect.png"), pos=(640, 275), 
+        play_buttton = Button(image=pygame.image.load("Menu/menu_assets/play-rect.png"), pos=(640, 275), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        quit_button = Button(image=pygame.image.load("menu_assets/quit-rect.png"), pos=(640, 475), 
+        quit_button = Button(image=pygame.image.load("Menu/menu_assets/quit-rect.png"), pos=(640, 475), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         screen.blit(text, rect)
@@ -62,9 +68,9 @@ def play(screen):
         rect = text.get_rect(center=(640, 60))
         screen.blit(text, rect)
 
-        bird_img = pygame.image.load('menu_assets/bird.png').convert_alpha()
-        jump_img = pygame.image.load('menu_assets/jumper-correct.png').convert_alpha()
-        frog_img = pygame.image.load('menu_assets/froginho.png').convert_alpha()
+        bird_img = pygame.image.load('Menu/menu_assets/bird.png').convert_alpha()
+        jump_img = pygame.image.load('Menu/menu_assets/jumper-correct.png').convert_alpha()
+        frog_img = pygame.image.load('Menu/menu_assets/froginho.png').convert_alpha()
 
         first_button = Button(image=bird_img, pos=(290, 360),
                               text_input="", font=get_font(45), base_color="#fafafa", hovering_color="#fafafa")

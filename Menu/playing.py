@@ -1,3 +1,8 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import pygame, sys
 
 from FlappyBird.FlappyBird_main import FlappyBird
@@ -7,7 +12,7 @@ from FrogAdventure.frog_adventure_main import FrogJourneyGame
 
 from DoodleJump.DoodleJump_main import DoodleJump
 
-from utils import *
+from Menu.utils import *
 
 
 def playing_flappybird(screen):
