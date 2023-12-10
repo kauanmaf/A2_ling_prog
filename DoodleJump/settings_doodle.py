@@ -1,3 +1,8 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import pygame
 
 # Inicializando o pygame
@@ -16,10 +21,10 @@ clock = pygame.time.Clock()
 FPS = 60
 
 # Carregando músicas e sons
-background_music = pygame.mixer.music.load("DoodleJump_assets/music.mp3")
+background_music = pygame.mixer.music.load("DoodleJump/DoodleJump_assets/music.mp3")
 # background_music.set_volume(0.6)
 # background_music.play(- 1, 0.0)
-death_sound = pygame.mixer.Sound("DoodleJump_assets/death.mp3")
+death_sound = pygame.mixer.Sound("DoodleJump/DoodleJump_assets/death.mp3")
 death_sound.set_volume(0.5)
 
 # Construindo as variáveis do jogo
@@ -37,9 +42,9 @@ font_small = pygame.font.SysFont("Lucida Sans", 20)
 font_big = pygame.font.SysFont("Lucida Sans", 24)
 
 # Carregando imagens
-jumper_image = pygame.image.load("DoodleJump_assets/jumper.png")
-background_image = pygame.image.load("DoodleJump_assets/background.png")
-platform_image = pygame.image.load("DoodleJump_assets/platform.png")
+jumper_image = pygame.image.load("DoodleJump/DoodleJump_assets/jumper.png")
+background_image = pygame.image.load("DoodleJump/DoodleJump_assets/background.png")
+platform_image = pygame.image.load("DoodleJump/DoodleJump_assets/platform.png")
 
 # Carregando a imagem do inimigo
-enemy_sheet_image = pygame.image.load("DoodleJump_assets/enemy.png")
+enemy_sheet_image = pygame.image.load("DoodleJump/DoodleJump_assets/enemy.png")

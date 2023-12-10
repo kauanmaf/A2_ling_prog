@@ -1,3 +1,8 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 from abstract import Minigame_abs
 from DoodleJump.settings_doodle import *
 from DoodleJump.classes_base_doodle import *
@@ -110,8 +115,8 @@ class DoodleJump(Minigame_abs):
         self._score = 0
         self._fade_counter = 0
 
-        if os.path.exists("score.txt"):
-            with open("score.txt", "r") as file:
+        if os.path.exists("DoodleJump/score.txt"):
+            with open("DoodleJump/score.txt", "r") as file:
                 self._high_score = int(file.read())
         else:
             self._high_score = 0
@@ -262,7 +267,7 @@ class DoodleJump(Minigame_abs):
         """
         if self._score > self._high_score:
             self._high_score = self._score
-            with open("score.txt", "w") as file:
+            with open("DoodleJump/score.txt", "w") as file:
                 file.write(str(self._high_score))
 
     def reset_game(self):
@@ -285,7 +290,7 @@ class DoodleJump(Minigame_abs):
             self._fade_counter = 0
             
             if os.path.exists("score.txt"):
-                with open("score.txt", "r") as file:
+                with open("DoodleJump/score.txt", "r") as file:
                     self._high_score = int(file.read())
             else:
                 self._high_score = 0
