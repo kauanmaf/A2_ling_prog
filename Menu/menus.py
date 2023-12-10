@@ -23,8 +23,8 @@ def main_menu(screen):
     :param pygame.surface screen: tela na qual o menu vai ser criado
     """
     while True:
+        # colocando background
         screen.blit(BACKGROUND, (0, 0))
-        # screen.fill((0, 0, 0))
         pygame.display.set_caption("Main menu")
 
         mouse_position = pygame.mouse.get_pos()
@@ -32,6 +32,7 @@ def main_menu(screen):
         text = get_font(100).render("MINI GAMES", True, "#d4a6a4")
         rect = text.get_rect(center=(640, 100))
 
+        # criando botões
         play_buttton = Button(image=pygame.image.load("Menu/menu_assets/play-rect.png"), pos=(640, 275), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         quit_button = Button(image=pygame.image.load("Menu/menu_assets/quit-rect.png"), pos=(640, 475), 
