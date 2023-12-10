@@ -18,6 +18,10 @@ pygame.mixer.music.load("Menu/menu_assets/pixel-perfect.mp3")
 pygame.mixer.music.play(-1)
 
 def main_menu(screen):
+    """Função que cria o menu principal
+
+    :param pygame.surface screen: tela na qual o menu vai ser criado
+    """
     while True:
         screen.blit(BACKGROUND, (0, 0))
         # screen.fill((0, 0, 0))
