@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu package &mdash; A1 Linguagens de Programação 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            A1 Linguagens de Programação
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="abstract.html">abstract module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FlappyBird.html">FlappyBird package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FrogAdventure.html">FrogAdventure package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DoodleJump.html">DoodleJump package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">A1 Linguagens de Programação</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Menu package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Menu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="menu-package">
+<h1>Menu package<a class="headerlink" href="#menu-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Menu.button">
+<span id="menu-button-module"></span><h2>Menu.button module<a class="headerlink" href="#module-Menu.button" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Menu.button.Button">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Menu.button.</span></span><span class="sig-name descname"><span class="pre">Button</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovering_color</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Menu.button.Button" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe cujas instâncias são os botões que fazem o menu funcionar</p>
+<section id="atributos">
+<h3>Atributos:<a class="headerlink" href="#atributos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__image</span></code> (pygame.Surface):</dt><dd><p>A imagem que representa o botão</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__x_pos</span> <span class="pre">(int):</span></code></dt><dd><p>A posição do botão ao longo do eixo x</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__y_pos</span> <span class="pre">(int):</span></code></dt><dd><p>A posição do botão ao longo do eixo y</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__font</span> <span class="pre">(pygame.Font):</span></code></dt><dd><p>A fonte do texto do botão</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__base_color</span> <span class="pre">(pygame.Color)</span></code></dt><dd><p>A cor normal do texto do botão</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__text_input</span> <span class="pre">(str):</span></code></dt><dd><p>O texto do botão</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">__text</span> <span class="pre">(pygame.Surface):</span></code></dt><dd><p>O texto com a cor normal que deve ter</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-rect</span> <span class="pre">(pygame.Rect)</span></code></dt><dd><p>O retângulo que representa a dimensão e a posição da imagem na tela</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">text_rec</span> <span class="pre">(pygame.rect)</span></code></dt><dd><p>O retângulo que representa a dimensão e a posição da imagem na tela</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="metodos">
+<h3>Métodos:<a class="headerlink" href="#metodos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">update(screen)</span></code>:</dt><dd><p>Atualiza o estado do botão, colocando-o na tela.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">checkForInput(position)</span></code>:</dt><dd><p>Verifica se o mouse está dentro do range do retângulo</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">update(screen)</span></code>:</dt><dd><p>Atualiza o estado do botão, colocando-o na tela.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="Menu.button.Button.changeColor">
+<span class="sig-name descname"><span class="pre">changeColor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Menu.button.Button.changeColor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Menu.button.Button.checkForInput">
+<span class="sig-name descname"><span class="pre">checkForInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Menu.button.Button.checkForInput" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Menu.button.Button.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Menu.button.Button.update" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="menu-menus-module">
+<h2>Menu.menus module<a class="headerlink" href="#menu-menus-module" title="Link to this heading"></a></h2>
+</section>
+<section id="menu-playing-module">
+<h2>Menu.playing module<a class="headerlink" href="#menu-playing-module" title="Link to this heading"></a></h2>
+</section>
+<section id="menu-utils-module">
+<h2>Menu.utils module<a class="headerlink" href="#menu-utils-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Menu">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Menu" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniel, Guilherme, Kauan e Leonardo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
