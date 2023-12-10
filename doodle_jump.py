@@ -22,7 +22,7 @@ class Jumper(Player):
         rect: pygame.Rect
             O retângulo que contém a posição e a dimensão do saltador
             
-        rect.center: tupla
+        rect.center: tuple
             As coordenadas x e y do saltador
             
         vel_y: int
@@ -184,6 +184,11 @@ class Platform(pygame.sprite.Sprite):
     def update(self, scroll):
         """
         A função realiza o movimento das plataforma e atualiza o grupo de plataformas
+        
+        Parâmetro:
+        ----------
+            scroll: int
+                A taxa de rolagem vertical da plataforma
         """
         # Movendo a plataforma de um lado para o outro se for uma plataforma móvel
         if self.movement == True:
@@ -203,10 +208,51 @@ class Platform(pygame.sprite.Sprite):
             self.kill()
             
 class SpriteSheet():
+    """
+    A classe tem como objetivo criar e obter sprites
+
+    Atributos:
+    ----------
+        sheet: pygame.Surface
+            A imagem utilizada na construção dos sprites
+    """
     def __init__(self, sheet_image):
+        """
+        Inicializa a classe SpriteSheet
+        
+        Parâmetros:
+        -----------
+            sheet: pygame.Surface
+                A imagem utilizada na confecção dos sprites
+        """
         self.sheet = sheet_image
         
     def get_image(self, frame, width, height, scale, colour):
+        """
+        A função obtém os sprites de uma determinada imagem
+        
+        Parâmetros:
+        -----------
+            frame: pygame.Surface
+                O quadro da imagem
+                
+            width: int
+                A largura do sprite
+                
+            height: int
+                A altura do sprite
+                
+            scale: float
+                A escala do sprite
+                
+            colour: tuple
+                O código da cor no sistema RGB
+                
+        Retorno:
+        --------
+            image: pygame.Surface
+                Retorna o quadro da imagem
+        """
         image = pygame.Surface((width, height))
         image.blit(self.sheet, (0, 0), ((frame * width), 0, width, height))
         image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))

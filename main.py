@@ -2,7 +2,7 @@ import pygame
 import random
 import os
 from settings import *
-from endless_vertical_platformer import *
+from doodle_jump import *
 from utils import *
 from pygame import mixer
 
