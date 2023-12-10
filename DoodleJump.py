@@ -18,9 +18,14 @@ class DoodleJump(Minigame_abs):
         self.game_over = False
         self.score = 0
         self.fade_counter = 0
-        self.high_score = 0
 
+        if os.path.exists("score.txt"):
+            with open("score.txt", "r") as file:
+                self.high_score = int(file.read())
+        else:
+            self.high_score = 0
         
+
 
     def create_background(self):
     # Atualiza a rolagem do plano de fundo com base no deslocamento (scroll)
@@ -102,16 +107,66 @@ class DoodleJump(Minigame_abs):
         self.platform_group.update(self.scroll)
         self.enemy_group.update(self.scroll)
 
+    def draw_fade_counter(self):
+            # Construindo o fundo da imagem de game over
+        for rect_y in range(0, 6, 2):
+            pygame.draw.rect(self.screen, BLACK, (0, rect_y * 100, self.fade_counter, 100))
+            pygame.draw.rect(self.screen, BLACK, (SCREEN_WIDTH - self.fade_counter, (rect_y + 1) * 100, SCREEN_WIDTH, 100))
+    
+    def draw_game_over(self):
+            self.draw_text("GAME OVER", font_big, WHITE, 130, 200) 
+            self.draw_text("SCORE: " + str(self.score), font_big, WHITE, 130, 250) 
+            self.draw_text("PRESS SPACE TO PLAY AGAIN", font_big, WHITE, 40, 300)  
+    
+    def setting_high_score(self):
+        # Atualizando a pontuação mais alta
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open("score.txt", "w") as file:
+                file.write(str(self.high_score))
+
+    def reset_game(self):
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE]:
+            self.screen = screen
+            self.game_over = False
+            self.enemy_sheet = SpriteSheet(enemy_sheet_image)
+            self.platform_group = pygame.sprite.Group()
+            self.enemy_group = pygame.sprite.Group()
+            self.jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150, self.platform_group)
+            self.scroll = self.jumpy.move()
+            self.background_scroll = 0
+            self.game_over = False
+            self.score = 0
+            self.fade_counter = 0
+            
+            if os.path.exists("score.txt"):
+                with open("score.txt", "r") as file:
+                    self.high_score = int(file.read())
+            else:
+                self.high_score = 0
+
     def run(self):
         if not self.game_over:
             self.create_background()
             self.create_platforms()
             self.create_enemies()
             self.draw()
-            self.scroll = self.jumpy.move()  # Update self.scroll here
+            self.scroll = self.jumpy.move() 
             self.update_score()
             self.update()
             self.check_game_over()
+        else:
+            if self.fade_counter < SCREEN_WIDTH:
+                self.create_background()
+                self.fade_counter += 5
+                self.draw_fade_counter()
+            else:
+                self.draw_game_over()
+                self.setting_high_score()
+                self.reset_game()
+
+
 
     
     
