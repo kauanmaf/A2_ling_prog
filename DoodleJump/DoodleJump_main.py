@@ -1,3 +1,8 @@
+"""
+Módulo criado para a execução do jogo Doodle Jump.
+Esse módulo contém as pricipais classes de execução do jogo Doodle Jump. 
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 

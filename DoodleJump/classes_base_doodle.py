@@ -1,3 +1,8 @@
+"""
+Módulo criado para o esboço do jogo Doodle Jump.
+Esse módulo contém as classes básicas do jogo Doodle Jump: Jumper, Platform, SpriteSheet e Enemy.
+"""
+
 import os
 import sys
 project_root = os.path.dirname(os.path.dirname(__file__)) 
