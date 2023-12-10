@@ -1,5 +1,10 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import pygame
-from settings_flappy import *
+from FlappyBird.settings_flappy import *
 from abstract import *
 
 class Bird(Player):

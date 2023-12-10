@@ -1,9 +1,13 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import pygame
 import random
-import sys
-from settings_flappy import *
+from FlappyBird.settings_flappy import *
 from abstract import *
-from classes_base_flappy import *
+from FlappyBird.classes_base_flappy import *
 
 class FlappyBird(Minigame_abs):
     """

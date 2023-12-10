@@ -1,6 +1,11 @@
-from settings_frog import *
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
+from FrogAdventure.settings_frog import *
 import pygame
-from classes_base_frog import *
+from FrogAdventure.classes_base_frog import *
 from pygame.locals import *
 from abstract import Minigame_abs
 import sys
