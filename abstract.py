@@ -4,7 +4,7 @@ import pygame
 from abc import ABC
 
 
-class Minigame(ABC):
+class Minigame_abs(ABC):
     "Classe abstrata que serve para todos os minigames"
 
     def __init__(self):
