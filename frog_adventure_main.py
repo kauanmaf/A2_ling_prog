@@ -112,6 +112,10 @@ class FrogJourneyGame(Minigame_abs):
 
             #Determinaremos a target_lane do player
             if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.mixer.music.stop()
+                    pygame.quit()
+                    sys.exit()
                 if event.key == K_LEFT and self.__player.rect.center[0] > left_lane:
                     self.__player._target_lane = left_lane
                 elif event.key == K_RIGHT and self.__player.rect.center[0] < right_lane:

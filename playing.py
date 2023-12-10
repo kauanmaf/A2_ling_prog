@@ -3,6 +3,8 @@ import pygame, sys
 from FlappyBird import FlappyBird
 from settings import *
 
+from frog_adventure_main import FrogJourneyGame
+
 from utils import *
 
 
@@ -40,18 +42,9 @@ def playing_flappybird(screen):
         # Fazendo um update pra manter no caso de atualizações
         pygame.display.update()
         
+def playing_jumpman(scree):
+    pass
 
-def playing_jumpman(screen):
-    while True:
-        screen.fill((252, 25, 192))
-
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
-
-        pygame.display.update()
+def playing_frog():
+    game = FrogJourneyGame()
+    game.run()
