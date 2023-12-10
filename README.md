@@ -19,14 +19,14 @@ Os assets estão incluídos no repositório, e os devidos créditos se encontram
 
 ## Mini-Jogos
 
-### DoodleJump (Leonardo)
+### DoodleJump
 
 Utilize as setas para mover seu personagem. Tome cuidado com os inimigos e com as plataformas que se movem. O céu é o limite!
 
-### Flappy Bird (Kauan)
+### Flappy Bird
 
 O jogo que marcou uma geração. Utilize a barra de espaço para controlar seu pássaro e evite bater nos canos. Não será uma tarefa fácil.
 
-### A Frog Adventure (Guilherme)
+### A Frog Adventure
 
 O dia-a-dia de um sapo surfista. Utilize as setas para desviar de predadores e plantas inconvenientes.
