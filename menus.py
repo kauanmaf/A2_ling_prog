@@ -3,7 +3,7 @@ from button import Button
 
 from utils import *
 
-from playing import playing_flappybird, playing_jumpman, playing_frog
+from playing import playing_flappybird, playing_doodleman, playing_frog
 
 pygame.init()
 
@@ -61,7 +61,7 @@ def play(screen):
                     playing_flappybird(screen)
                 if second_button.checkForInput(mouse_position):
                     pygame.mixer.music.stop()
-                    playing_jumpman(screen)
+                    playing_doodleman(screen)
                 if third_button.checkForInput(mouse_position):
                     pygame.mixer.music.stop()
                     playing_frog()

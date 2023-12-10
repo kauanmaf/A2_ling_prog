@@ -110,7 +110,7 @@ class DoodleJump(Minigame_abs):
         # Criando a instância do jogador
         self.__jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150, self.__platform_group)  
         
-        self.__scroll = self.__jumpy.move()
+        self.__scroll = self.__jumpy.update()
         self._background_scroll = 0
         self._score = 0
         self._fade_counter = 0
@@ -283,7 +283,7 @@ class DoodleJump(Minigame_abs):
             self.__platform_group = pygame.sprite.Group()
             self.__enemy_group = pygame.sprite.Group()
             self.__jumpy = Jumper(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 150, self.__platform_group)
-            self.__scroll = self.__jumpy.move()
+            self.__scroll = self.__jumpy.update()
             self._background_scroll = 0
             self.__game_over = False
             self._score = 0
@@ -306,7 +306,7 @@ class DoodleJump(Minigame_abs):
             self.create_platforms()
             self.create_enemies()
             self.draw()
-            self.__scroll = self.__jumpy.move() 
+            self.__scroll = self.__jumpy.update() 
             self.update_score()
             self.update()
             self.check_game_over()

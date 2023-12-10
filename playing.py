@@ -5,6 +5,8 @@ from FlappyBird.settings_flappy import *
 
 from FrogAdventure.frog_adventure_main import FrogJourneyGame
 
+from DoodleJump.DoodleJump_main import DoodleJump
+
 from utils import *
 
 
@@ -42,7 +44,34 @@ def playing_flappybird(screen):
         # Fazendo um update pra manter no caso de atualizações
         pygame.display.update()
         
-def playing_jumpman(scree):
+def playing_doodleman(screen):
+    pygame.display.set_caption("Flappy Bird")
+    
+    clock = pygame.time.Clock()
+    game = DoodleJump(screen)
+
+    while True:
+        # Configurando a taxa de atualização do jogo
+        clock.tick(100)
+
+        # Configurando o fundo da tela
+        screen.fill((0, 0, 0))
+
+        # Criando uma instância do jogo
+        game.run()
+
+        # Loop for para casa a pessoa queira sair do jogo
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+
+        # Fazendo um update pra manter no caso de atualizações
+        pygame.display.update()
     pass
 
 def playing_frog():

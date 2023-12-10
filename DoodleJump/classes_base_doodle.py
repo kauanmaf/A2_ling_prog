@@ -66,7 +66,7 @@ class Jumper(Player):
         self.platform_group = platform_group
 
         
-    def move(self):
+    def update(self):
         """
         A função realiza os movimentos horizontais e verticais do jogador
         

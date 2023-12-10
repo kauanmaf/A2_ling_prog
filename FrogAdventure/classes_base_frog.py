@@ -6,7 +6,7 @@ sys.path.append(project_root)
 import pygame
 from pygame.locals import *
 import random
-from settings_frog import *
+from FrogAdventure.settings_frog import *
 
 pygame.init()
 
