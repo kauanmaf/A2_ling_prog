@@ -1,7 +1,7 @@
 import pygame, sys
 
 from FlappyBird import FlappyBird
-from settings import *
+from settings_flappy import *
 
 from frog_adventure_main import FrogJourneyGame
 

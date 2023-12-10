@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from settings_flappy import *
 from abstract import *
 
 class Bird(Player):
