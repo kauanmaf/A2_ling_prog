@@ -1,6 +1,11 @@
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import pygame
 import random
-from settings_doodle import *
+from DoodleJump.settings_doodle import *
 from abstract import *
 
 class Jumper(Player):

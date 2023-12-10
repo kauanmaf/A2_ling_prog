@@ -1,6 +1,6 @@
 from abstract import Minigame_abs
-from settings_doodle import *
-from classes_base_doodle import *
+from DoodleJump.settings_doodle import *
+from DoodleJump.classes_base_doodle import *
 import sys
 import random
 
