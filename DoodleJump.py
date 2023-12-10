@@ -294,6 +294,8 @@ class DoodleJump(Minigame_abs):
         """
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
         """
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.play(-1, 0.0)
         if not self.__game_over:
             self.create_background()
             self.create_platforms()
