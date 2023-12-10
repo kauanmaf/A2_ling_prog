@@ -28,7 +28,7 @@ class Jumper(Player):
         vel_y: int
             A velocidade vertical do jogador
             
-        flit: bool
+        flip: bool
             A rotação do saltador
             
     Métodos:
@@ -133,22 +133,29 @@ class Platform(pygame.sprite.Sprite):
     ----------
         image: pygame.Surface
             A imagem da plataforma
+            
         movement: bool
             A mobilidade da plataforma
+            
         move_counter: int
             O contador de movimento
+            
         direction: int
             O sentido da direção horizontal da plataforma
+            
         speed: int
             A velocidade da plataforma
+            
         rect: pygame.Rect
             O retângulo que possui a posição e a dimensão da plataforma
+            
         rect.x: int
             A coordenada x do retângulo
+            
         rect.y: int
             A coordenada y do retângulo
             
-    Métodos:
+    Método:
     --------
         update(scroll)
             Movimenta e atualiza as plataformas com base na variável de rolagem
@@ -183,7 +190,7 @@ class Platform(pygame.sprite.Sprite):
         
     def update(self, scroll):
         """
-        A função realiza o movimento das plataforma e atualiza o grupo de plataformas
+        A função realiza os movimentos das plataformas e atualiza o grupo de plataformas
         
         Parâmetro:
         ----------
@@ -215,6 +222,11 @@ class SpriteSheet():
     ----------
         sheet: pygame.Surface
             A imagem utilizada na construção dos sprites
+            
+    Método:
+    -------
+        get_image(frame, width, height, scale, colour)
+            Obtém sprites de uma imagem 
     """
     def __init__(self, sheet_image):
         """
@@ -261,7 +273,55 @@ class SpriteSheet():
         return image
         
 class Enemy(pygame.sprite.Sprite):
+    """
+    A classe é responsável pela criação e atualização do inimigo no jogo
+    
+    Atributos:
+    ----------
+        animation: list
+            A lista das animações do inimigo
+        
+        frame_index: int
+            O índice referente ao quadro de animação
+        
+        update_time: pygame.time
+            O instante da atualização do quadro
+        
+        direction: int
+            O sentido da direção horizontal do inimigo
+        
+        flip: bool
+            A rotação do inimigo
+        
+        image: pygame.Surface
+            O quadro da imagem do inimigo
+        
+        rect: pygame.Rect
+            O retângulo que contém a dimensão e a posição do inimigo
+            
+    Método:
+    -------
+        update(scroll)
+            Movimenta e atualiza o inimigo com base na variável de rolagem
+    """
     def __init__(self, SCREEN_WIDTH, y, sprite_sheet, scale):
+        """
+        Inicializa a classe Enemy
+        
+        Parâmetros:
+        -----------
+            SCREEN_WIDTH: int
+                A largura da janela do jogo
+            
+            y: int
+                A coordenada y do inimigo
+            
+            sprite_sheet: pygame.Surface
+                O sprite do inimigo
+            
+            scale: int
+                A escala do sprite referente ao inimigo
+        """
         pygame.sprite.Sprite.__init__(self)
         # Definindo variáveis
         self.animation_list = []
@@ -293,6 +353,14 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = y
         
     def update(self, scroll):
+        """
+        A função movimenta e atualiza o inimigo
+        
+        Parâmetro:
+        ----------
+            scroll: int
+                A taxa de rolagem vertical do inimigo
+        """
         # Atualizando a animação
         ANIMATION_COOLDOWN = 60
         # Atualizando a imagem dependendo do quadro atual

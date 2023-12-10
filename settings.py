@@ -10,7 +10,7 @@ SCREEN_HEIGHT = 600
 
 # Criando a janela do jogo
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Endless Vertical")
+pygame.display.set_caption("Doodle Jump")
 
 # Definindo a taxa de quadros
 clock = pygame.time.Clock()
