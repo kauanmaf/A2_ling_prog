@@ -139,8 +139,38 @@ class Platform(pygame.sprite.Sprite):
             O contador de movimento
         direction: int
             O sentido da direção horizontal da plataforma
+        speed: int
+            A velocidade da plataforma
+        rect: pygame.Rect
+            O retângulo que possui a posição e a dimensão da plataforma
+        rect.x: int
+            A coordenada x do retângulo
+        rect.y: int
+            A coordenada y do retângulo
+            
+    Métodos:
+    --------
+        update(scroll)
+            Movimenta e atualiza as plataformas com base na variável de rolagem
     """
     def __init__(self, x, y, width, movement):
+        """
+        Inicializa a classe Platform
+        
+        Parâmetros:
+        -----------
+            x: int
+                Coordenada x da plataforma
+            
+            y: int
+                Coordenada y da plataforma
+
+            width: int 
+                A largura da plataforma
+            
+            movement: bool
+                O estado da plataforma
+        """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(platform_image, (width, 10))
         self.movement = movement
@@ -152,6 +182,9 @@ class Platform(pygame.sprite.Sprite):
         self.rect.y = y
         
     def update(self, scroll):
+        """
+        A função realiza o movimento das plataforma e atualiza o grupo de plataformas
+        """
         # Movendo a plataforma de um lado para o outro se for uma plataforma móvel
         if self.movement == True:
             self.move_counter += 1
@@ -165,7 +198,7 @@ class Platform(pygame.sprite.Sprite):
         # Atualizando a posição vertical das plataformas
         self.rect.y += scroll 
 
-        # Verifique seva plataforma saiu da tela
+        # Verifique se a plataforma saiu da tela
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
             
