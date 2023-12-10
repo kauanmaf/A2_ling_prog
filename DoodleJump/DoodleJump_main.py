@@ -295,6 +295,17 @@ class DoodleJump(Minigame_abs):
             else:
                 self._high_score = 0
 
+    @property      
+    def score(self):
+        """
+        Obtém a pontuação do jogador
+        
+        Retorna:
+        --------
+            Retorna a pontuação do jogador
+        """
+        return self._score
+
     def run(self):
         """
         Executa o loop do jogo, lidando com início, reinício, desenho e atualização do jogo.
@@ -331,7 +342,7 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     # Criando uma instância do jogo
     game = DoodleJump(screen)
-
+    
 
     while True:
         # Configurando a taxa de atualização do jogo
@@ -354,5 +365,4 @@ if __name__ == "__main__":
                         sys.exit()
 
         # Fazendo um update pra manter no caso de atualizações
-        pygame.display.update()
-        
+        pygame.display.update()     
