@@ -1,112 +1,429 @@
 import pygame
-import sys
-import random
 from settings import *
 from abstract import *
 
 class Bird(Player):
-    def __init__(self, bird_start_position):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = bird_images[0]
+    """
+    Classe responsável pela criação e controle do pássaro no jogo FlappyBird.
+
+    Atributos:
+    -----------
+    - ``image`` (pygame.Surface):
+        A imagem que representa o pássaro.
+
+    - ``rect`` (pygame.Rect):
+        O retângulo que representa a posição e dimensões do pássaro na tela.
+
+    - ``__image_index`` (int):
+        O índice usado para a animação do pássaro.
+
+    - ``__vel`` (float):
+        A velocidade vertical do pássaro.
+
+    - ``__flap`` (bool):
+        Indica se o pássaro realizou um movimento de flap.
+
+    - ``_alive`` (bool):
+        Indica se o pássaro está vivo.
+
+    Métodos:
+    --------
+    - ``update(user_input, y_pos_ground = 530)``:
+        Atualiza o estado do pássaro com base na entrada do usuário.
+
+    Parâmetros:
+    - ``user_input`` (dict):
+        Dicionário contendo o estado das teclas pressionadas pelo usuário.
+
+    - ``y_pos_ground`` (int):
+        Posição vertical do chão no jogo (padrão: 530).
+
+    Uso:
+    -----
+    bird = Bird(bird_start_position)
+    bird.update(user_input)
+    """
+
+    def __init__(self, bird_start_position : tuple):
+        """
+        Inicializa a classe Bird.
+
+        Parâmetros:
+        -----------
+        - ``bird_start_position`` (tuple):
+            Tupla com a posição inicial do pássaro (x,y).
+        """
+        super().__init__()
+        # Inicialização dos atributos públicos
+        self.image = bird_images_flappy[0]
         self.rect = self.image.get_rect()
-        self.rect.center = bird_start_position 
-        self.image_index = 0
-        self.vel = 0
-        self.flap = False
-        self.alive = True
-        self.bird_start_position = bird_start_position
-        self.y_pos_ground = 530
+        self.rect.center = bird_start_position
+        self.__image_index = 0
+        self.__vel = 0
+        self.__flap = False
+        self._alive = True
+    
 
+    def update(self, user_input, y_pos_ground:int = 530):
+        """
+     - ``update(user_input, y_pos_ground=530)``:
+        Atualiza o estado do pássaro com base na entrada do usuário.
 
-    def update(self, user_input):
-        # Animating bird
-        if self.alive:
-            self.image_index += 1
-        if self.image_index >= 30:
-            self.image_index = 0
-        self.image = bird_images[self.image_index // 10] 
+    Parâmetros:
+    - ``user_input`` (dict):
+        Dicionário contendo o estado das teclas pressionadas pelo usuário.
 
-        self.vel += 0.5
-        if self.vel >7:
-            self.vel = 7
-        if self.rect.bottom < self.y_pos_ground:
-            self.rect.y += int(self.vel)
-        if self.vel == 0:
-            self.flap = 0
-        
-        # mudnado o jeito que o passaro olha
-        self.image = pygame.transform.rotate(self.image, self.vel*-7)
+    - ``y_pos_ground`` (int):
+        Posição vertical do chão no jogo (padrão: 530)..
+        """
+        # Animação do pássaro
+        if self._alive:
+            self.__image_index += 1
+        if self.__image_index >= 30:
+            self.__image_index = 0
+        self.image = bird_images_flappy[self.__image_index // 10]
 
-        if user_input[pygame.K_SPACE] and not self.flap and self.rect.y > 0 and self.alive:
-            self.flap = True
-            self.vel = -7
+        # Atualização da velocidade vertical
+        self.__vel += 0.5
+        if self.__vel > 7:
+            self.__vel = 7
+        if self.rect.bottom < y_pos_ground:
+            self.rect.y += int(self.__vel)
+        if self.__vel == 0:
+            self.__flap = False
+
+        # Verificação do flap
+        if user_input[pygame.K_SPACE] and not self.__flap and self.rect.y > 0 and self._alive:
+            self.__flap = True
+            self.__vel = -7
+            flap_sound_flappy.play()
+
+        # Alteração da orientação do pássaro
+        self.image = pygame.transform.rotate(self.image, self.__vel * -7)
+
 
 class Ground(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, scroll_speed) -> None:
-        pygame.sprite.Sprite.__init__(self)
-        self.image = ground_image
+    """
+    Classe responsável pela criação e controle do solo no jogo FlappyBird.
+
+    Atributos:
+    -----------
+    - ``image`` (pygame.Surface):
+        Superfície representando a imagem do solo.
+
+    - ``rect`` (pygame.Rect):
+        Retângulo representando a posição e dimensões do solo na tela.
+
+    - ``__scroll_speed`` (int):
+        Velocidade de deslocamento do solo.
+
+    Métodos:
+    --------
+    - ``update()``:
+        Atualiza a posição do solo com base na velocidade de deslocamento.
+
+    Parâmetros:
+    -----------
+    - ``pos_x`` (int):
+        Posição horizontal inicial do solo.
+
+    - ``pos_y`` (int):
+        Posição vertical inicial do solo.
+
+    - ``scroll_speed`` (int):
+        Velocidade de deslocamento do solo.
+
+    Uso:
+    -----
+    ground = Ground(pos_x, pos_y, scroll_speed)
+    ground.update()
+    """
+    def __init__(self, pos_x: int, pos_y: int, scroll_speed: int):
+        """
+        Inicializa a classe Ground.
+
+        Parâmetros:
+        -----------
+        - ``pos_x`` (int):
+            Posição horizontal inicial do solo.
+
+        - ``pos_y`` (int):
+            Posição vertical inicial do solo.
+
+        - ``__scroll_speed`` (int):
+            Velocidade de deslocamento do solo.
+        """
+        super().__init__()
+
+        # Inicialização dos atributos públicos
+        self.image = ground_image_flappy
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-        self.scroll_speed = scroll_speed
-    
+        # Inicialização de atributos privados
+        self.__scroll_speed = scroll_speed
+
     def update(self):
-        self.rect.x -= self.scroll_speed
+        """
+        Atualiza a posição do solo com base na velocidade de deslocamento.
+        """
+        self.rect.x -= self.__scroll_speed
         if self.rect.x <= -self.image.get_width():
             self.kill()
 
+
 class Pipe(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, image, pipe_type, scroll_speed, bird_position):
-        pygame.sprite.Sprite.__init__(self)
+    """
+    Classe responsável pela criação e controle dos canos no jogo FlappyBird.
+
+    Atributos:
+    -----------
+    - ``image`` (pygame.Surface):
+        Superfície representando a imagem do cano.
+
+    - ``rect`` (pygame.Rect):
+        Retângulo representando a posição e dimensões do cano na tela.
+
+    - ``__scroll_speed`` (int):
+        Velocidade de deslocamento do cano.
+
+    - ``_pipe_type`` (str):
+        Tipo de cano ("top" para o cano superior, "bottom" para o cano inferior).
+
+    - ``_enter`` (bool):
+        Indica se o pássaro entrou no espaço entre os canos.
+
+    - ``_exit`` (bool):
+        Indica se o pássaro saiu do espaço entre os canos.
+
+    - ``_passed`` (bool):
+        Indica se o pássaro passou pelos canos.
+
+    Métodos:
+    --------
+    - ``update()``:
+        Atualiza a posição do cano com base na velocidade de deslocamento.
+
+    Parâmetros:
+    -----------
+    - ``pos_x`` (int):
+        Posição horizontal inicial do cano.
+
+    - ``pos_y`` (int):
+        Posição vertical inicial do cano.
+
+    - ``image`` (pygame.Surface):
+        Superfície representando a imagem do cano.
+
+    - ``pipe_type`` (str):
+        Tipo de cano ("top" para o cano superior, "bottom" para o cano inferior).
+
+    - ``scroll_speed`` (int):
+        Velocidade de deslocamento do cano.
+
+    Uso:
+    -----
+    pipe = Pipe(pos_x, pos_y, image, pipe_type, scroll_speed)
+    pipe.update()
+    """
+    def __init__(self, pos_x: int, pos_y: int, image: pygame.Surface, pipe_type: str, scroll_speed: int):
+        """
+        Inicializa a classe Pipe
+
+        Parâmetros:
+        -----------
+        - ``pos_x`` (int):
+        Posição horizontal inicial do cano.
+
+    - ``pos_y`` (int):
+        Posição vertical inicial do cano.
+
+    - ``image`` (pygame.Surface):
+        Superfície representando a imagem do cano.
+
+    - ``pipe_type`` (str):
+        Tipo de cano ("top" para o cano superior, "bottom" para o cano inferior).
+
+    - ``scroll_speed`` (int):
+        Velocidade de deslocamento do cano.
+        """
+        super().__init__()
+
+        # Inicialização de atributos públicos
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-        self.scroll_speed = scroll_speed
-        self.bird_position = bird_position
 
-        # Adding score related variables
-        self.enter = False
-        self.exit = False
-        self.passed = False
+        # Inicialização de atributos privados e protegidos
+        self.__scroll_speed = scroll_speed
+        self._pipe_type = pipe_type
 
-        self.pipe_type = pipe_type
+        # Atributos relacionados à pontuação
+        self._enter = False
+        self._exit = False
+        self._passed = False
     
     def update(self):
-        self.rect.x -= self.scroll_speed
+        """
+        Atualiza a posição do cano com base na velocidade de deslocamento.
+        """
+        self.rect.x -= self.__scroll_speed
         if self.rect.x <= -screen_width:
-            self.kill()  
+            self.kill()
+
 
 class CollisionDetector:
-    def __init__(self, bird, ground, pipes, screen):
-        self.bird = bird
-        self.ground = ground
-        self.pipes = pipes
+    """
+    Classe responsável pela detecção de colisões no jogo FlappyBird.
+
+    Atributos:
+    -----------
+    - ``screen`` (pygame.Surface):
+        Superfície da tela do jogo.
+
+    - ``__bird`` (pygame.sprite.GroupSingle):
+        Grupo de sprites contendo o pássaro.
+
+    - ``__ground`` (pygame.sprite.Group):
+        Grupo de sprites contendo o chão.
+
+    - ``__pipes`` (pygame.sprite.Group):
+        Grupo de sprites contendo os canos.
+
+    Métodos:
+    --------
+    - ``check_collisions()``:
+        Verifica e trata colisões entre o pássaro, o chão e os canos.
+
+    Parâmetros:
+    -----------
+    - ``bird`` (pygame.sprite.GroupSingle):
+        Grupo de sprites contendo o pássaro.
+
+    - ``ground`` (pygame.sprite.Group):
+        Grupo de sprites contendo o chão.
+
+    - ``pipes`` (pygame.sprite.Group):
+        Grupo de sprites contendo os canos.
+
+    - ``screen`` (pygame.Surface):
+        Superfície da tela do jogo.
+
+    Uso:
+    -----
+    collision_detector = CollisionDetector(bird, ground, pipes, screen)
+    collision_detector.check_collisions()
+    """
+
+    def __init__(self, bird: pygame.sprite.GroupSingle, ground: pygame.sprite.Group, 
+                 pipes: pygame.sprite.Group, screen: pygame.Surface):
+        """
+        Inicializa a classe CollisionDetector.
+
+        Parâmetros:
+        -----------
+        - ``screen`` (pygame.Surface):
+            Superfície da tela do jogo.
+
+        - ``bird`` (pygame.sprite.GroupSingle):
+            Grupo de sprites contendo o pássaro.
+
+        - ``ground`` (pygame.sprite.Group):
+            Grupo de sprites contendo o chão.
+
+        - ``pipes`` (pygame.sprite.Group):
+            Grupo de sprites contendo os canos.
+
+        - ``hit`` (bool):
+            Verifica se o pássaro já colidiu com o chão alguma vez
+        """
         self.screen = screen
+        self.__bird = bird
+        self.__ground = ground
+        self.__pipes = pipes
+        self.__hit = False
+        
 
     def check_collisions(self):
-        collision_ground = pygame.sprite.spritecollide(self.bird.sprite, self.ground, False)
-        collision_pipes = pygame.sprite.spritecollide(self.bird.sprite, self.pipes, False)
+        """
+        Verifica e trata colisões entre o pássaro, o chão e os canos.
+        """
+        collision_ground = pygame.sprite.spritecollide(self.__bird.sprite, self.__ground, False)
+        collision_pipes = pygame.sprite.spritecollide(self.__bird.sprite, self.__pipes, False)
 
         if collision_pipes or collision_ground:
-            self.bird.sprite.alive = False
+            # Fazendo o som na primeira vez que ocorre a colisão 
+            if self.__bird.sprite._alive:
+                hit_sound_flappy.play()
+
+            self.__bird.sprite._alive = False
             if collision_ground:
-                # Draw the game over image
-                self.screen.blit(game_over_image,
-                            (screen_width // 2 - game_over_image.get_width() // 2,
-                             screen_height // 2 - game_over_image.get_height() // 2))
+                # Fazendo o som da primeira vez que encosta no chão
+                if not self.__hit:
+                    die_sound_flappy.play()
+                    self.__hit = True
+                # Desenha a imagem de game over
+                self.screen.blit(game_over_image_flappy,
+                            (screen_width // 2 - game_over_image_flappy.get_width() // 2,
+                             screen_height // 2 - game_over_image_flappy.get_height() // 2))
+                
+
 
 class Menu:
-    def __init__(self, screen, bird_start_position):
+    """
+    Classe responsável por gerenciar o menu inicial do jogo FlappyBird.
+
+    Atributos:
+    -----------
+    - ``screen`` (pygame.Surface):
+        Superfície da tela do jogo.
+
+    - ``__bird_start_position`` (tuple):
+        Posição inicial do pássaro.
+
+    Métodos:
+    --------
+    - ``draw()``:
+        Desenha o menu inicial na tela.
+
+    Parâmetros:
+    -----------
+    - ``screen`` (pygame.Surface):
+        Superfície da tela do jogo.
+
+    - ``bird_start_position`` (tuple):
+        Posição inicial do pássaro.
+
+    Uso:
+    -----
+    menu = Menu(screen, bird_start_position)
+    menu.draw()
+    """
+
+    def __init__(self, screen : pygame.Surface , bird_start_position: tuple):
+        """
+        Inicializa a classe Menu.
+
+        Parâmetros:
+        -----------
+        - ``screen`` (pygame.Surface):
+            Superfície da tela do jogo.
+
+        - ``bird_start_position`` (tuple):
+            Posição inicial do pássaro.
+        """
         self.screen = screen
-        self.clock = pygame.time.Clock()
-        self.bird_start_position = bird_start_position
+        self.__bird_start_position = bird_start_position
 
     def draw(self):
-        self.screen.blit(skyline_image, (0, 0))
-        self.screen.blit(ground_image, Ground(0, 520, 3))
-        self.screen.blit(ground_image, Ground(ground_image.get_width(), 520, 3))
+        """
+        Desenha o menu inicial na tela.
+        """
+        self.screen.blit(skyline_image_flappy, (0, 0))
+        self.screen.blit(ground_image_flappy, Ground(0, 520, 3).rect)
+        self.screen.blit(ground_image_flappy, Ground(ground_image_flappy.get_width(), 520, 3).rect)
 
-        self.screen.blit(bird_images[0], self.bird_start_position)
-        self.screen.blit(start_image, (screen_width // 2 - start_image.get_width() // 2,
-                                        screen_height // 2 - start_image.get_height() // 2))
+        self.screen.blit(bird_images_flappy[0], self.__bird_start_position)
+        self.screen.blit(start_image_flappy, (screen_width // 2 - start_image_flappy.get_width() // 2,
+                                       screen_height // 2 - start_image_flappy.get_height() // 2))
