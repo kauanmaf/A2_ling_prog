@@ -302,6 +302,7 @@ class DoodleJump(Minigame_abs):
         
         Retorna:
         --------
+            _score: int
             Retorna a pontuação do jogador
         """
         return self._score
