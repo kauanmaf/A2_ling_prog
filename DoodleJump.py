@@ -176,7 +176,7 @@ class DoodleJump(Minigame_abs):
         """
         text_image = font.render(text, True, text_col)
         self.__screen.blit(text_image, (x, y))
-    
+
     def check_game_over(self):
         """
         Verifica se o jogo chegou ao fim, seja por tocar o topo da tela ou colidir com inimigos.
