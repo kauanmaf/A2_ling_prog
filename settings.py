@@ -17,9 +17,9 @@ clock = pygame.time.Clock()
 FPS = 60
 
 # Carregando músicas e sons
-pygame.mixer.music.load("endless_vertical_platformer_assets/music.mp3")
-pygame.mixer.music.set_volume(0.6)
-pygame.mixer.music.play(- 1, 0.0)
+background_music = pygame.mixer.music.load("endless_vertical_platformer_assets/music.mp3")
+# background_music.set_volume(0.6)
+# background_music.play(- 1, 0.0)
 death_sound = pygame.mixer.Sound("endless_vertical_platformer_assets/death.mp3")
 death_sound.set_volume(0.5)
 
