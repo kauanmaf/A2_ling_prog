@@ -57,6 +57,7 @@ def play(screen):
 
     :param pygame.Surface screen: tela na qual criamos o menu
     """
+    changed_screen = False
     while True:
         screen.blit(BACKGROUND, (0, 0))
         # screen.fill((0, 0, 0))
@@ -100,13 +101,19 @@ def play(screen):
                     pygame.mixer.music.stop()
                     playing_flappybird(screen)
                 if second_button.checkForInput(mouse_position):
+                    changed_screen = True
                     pygame.mixer.music.stop()
+                    # Tamanho da tela do jogo do doodle
+                    pygame.display.set_mode((400, 600), pygame.RESIZABLE) 
                     playing_doodleman(screen)
                 if third_button.checkForInput(mouse_position):
                     pygame.mixer.music.stop()
                     playing_frog()
-
+            if changed_screen:
+                    pygame.display.set_mode((1280, 720))
+                    changed_screen = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                
                 main_menu(screen)
 
 

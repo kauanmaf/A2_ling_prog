@@ -44,7 +44,7 @@ def playing_flappybird(screen):
                     pygame.quit()
                     sys.exit()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                        game_running = False
+                    game_running = False
 
         # Fazendo um update pra manter no caso de atualizações
         pygame.display.update()
