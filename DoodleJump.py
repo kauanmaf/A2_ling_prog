@@ -1,7 +1,8 @@
 from abstract import Minigame_abs
 from settings import *
-from endless_vertical_platformer import *
+from doodle_jump import *
 import sys
+import random
 
 class DoodleJump(Minigame_abs):
     def __init__(self, screen):
@@ -12,12 +13,14 @@ class DoodleJump(Minigame_abs):
         self.enemy_sheet = SpriteSheet(enemy_sheet_image)
         self.platform_group = pygame.sprite.Group()
         self.enemy_group = pygame.sprite.Group()
-        self.scroll = 0
+        self.scroll = self.jumpy.move()
         self.background_scroll = 0
         self.game_over = False
         self.score = 0
         self.fade_counter = 0
         self.high_score = 0
+
+        
 
     def create_background(self):
     # Atualiza a rolagem do plano de fundo com base no deslocamento (scroll)
@@ -34,17 +37,25 @@ class DoodleJump(Minigame_abs):
         
 
     def create_platforms(self):
-        platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
-        self.platform_group.add(platform)
-        if len(self.platform_group) < MAX_PLATFORMS:
+        if not self.platform_group:  # Check if the group is empty
+            # If the group is empty, add the first platform at a fixed position
+            platform = Platform(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT - 50, 100, False)
+            self.platform_group.add(platform)
+        else:
+            # Get the last platform in the group
+            last_platform = self.platform_group.sprites()[-1]
+
+            # Generate the new platform based on the last platform's position
             platform_width = random.randint(40, 60)
             platform_x = random.randint(0, SCREEN_WIDTH - platform_width)
-            platform_y = platform.rect.y - random.randint(80, 120)
+            platform_y = last_platform.rect.y - random.randint(80, 120)
             platform_type = random.randint(1, 2)
+
             if platform_type == 1 and self.score > 750:
                 platform_movement = True
             else:
                 platform_movement = False
+
             platform = Platform(platform_x, platform_y, platform_width, platform_movement)
             self.platform_group.add(platform)
 
@@ -74,19 +85,19 @@ class DoodleJump(Minigame_abs):
 
     def draw(self):
         # Desenhando uma linha da pontuação maior
-        pygame.draw.line(self.screen, WHITE, (0, self.score - self.high_score + SCROLL_THRESH),
-                         (SCREEN_WIDTH, self.score - self.high_score + SCROLL_THRESH), 3)
-        self.draw_text("HIGH SCORE", font_small, WHITE, SCREEN_WIDTH - 130, self.score - self.high_score + SCROLL_THRESH)
+        # pygame.draw.line(self.screen, WHITE, (0, self.score - self.high_score + SCROLL_THRESH),
+        #                  (SCREEN_WIDTH, self.score - self.high_score + SCROLL_THRESH), 3)
+        # self.draw_text("HIGH SCORE", font_small, WHITE, SCREEN_WIDTH - 130, self.score - self.high_score + SCROLL_THRESH)
 
         # Desenhando sprites do player
         self.platform_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
         self.jumpy.draw()
 
-        # Desenhando o painel
-        pygame.draw.rect(self.screen, PANEL, (0, 0, SCREEN_WIDTH, 30))
-        pygame.draw.line(self.screen, WHITE, (0, 30), (SCREEN_WIDTH, 30), 2)
-        self.draw_text("SCORE: " + str(self.score), font_small, WHITE, 0, 0)
+        # # Desenhando o painel
+        # pygame.draw.rect(self.screen, PANEL, (0, 0, SCREEN_WIDTH, 30))
+        # pygame.draw.line(self.screen, WHITE, (0, 30), (SCREEN_WIDTH, 30), 2)
+        # self.draw_text("SCORE: " + str(self.score), font_small, WHITE, 0, 0)
 
     def update(self):
         self.platform_group.update(self.scroll)
@@ -96,7 +107,11 @@ class DoodleJump(Minigame_abs):
         if not self.game_over:
             self.create_background()
             self.create_platforms()
+            self.create_enemies()
+            self.update_score()
             self.draw()
+            self.update()
+            self.check_game_over()
     
     
 
