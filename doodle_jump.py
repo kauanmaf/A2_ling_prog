@@ -258,7 +258,7 @@ class SpriteSheet():
                 A escala do sprite
                 
             colour: tuple
-                O código da cor no sistema RGB
+                O código da cor, no sistema RGB, considerada como transparente 
                 
         Retorno:
         --------
